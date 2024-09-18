@@ -1,43 +1,35 @@
--- Create Enum type for user roles
-create type role as enum ('admin', 'user', 'c-admin');
+CREATE TYPE role AS ENUM ('admin', 'user', 'c-admin');
 
--- Create Users Table
-create table if not exists users
+CREATE TABLE IF NOT EXISTS users
 (
-    id         uuid                     default gen_random_uuid() primary key,
-    phone      varchar(13) unique,
-    email      varchar unique,
-    password   varchar,
-    created_at timestamp with time zone default now(),
-    updated_at timestamp with time zone default now(),
-    deleted_at bigint                   default 0,
-    unique (email, deleted_at)
+    id         UUID PRIMARY KEY         DEFAULT gen_random_uuid(),
+    email      VARCHAR UNIQUE,
+    first_name VARCHAR,
+    last_name  VARCHAR,
+    phone      VARCHAR(13) UNIQUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
+    deleted_at BIGINT                   DEFAULT 0
 );
 
--- Create User Profile Table
-create table if not exists user_profile
+CREATE TABLE IF NOT EXISTS user_profile
 (
-    user_id         uuid references users (id) on delete cascade,
-    first_name      varchar,
-    last_name       varchar,
-    username        varchar unique,
-    nationality     varchar,
-    bio             varchar, -- Fix typo
-    role            role                     default 'user',
-    profile_image   varchar                  default 'no images',
-    followers_count int                      default 0,
-    following_count int                      default 0,
-    posts_count     int                      default 0,
-    created_at      timestamp with time zone default now(),
-    updated_at      timestamp with time zone default now(),
-    is_active       bool                     default true
+    user_id       UUID REFERENCES users (id) ON DELETE CASCADE,
+    username      VARCHAR UNIQUE,
+    nationality   VARCHAR,
+    bio           VARCHAR,
+    role          role                     DEFAULT 'user',
+    profile_image VARCHAR                  DEFAULT 'no image',
+    created_at    TIMESTAMP WITH TIME ZONE DEFAULT now(),
+    updated_at    TIMESTAMP WITH TIME ZONE DEFAULT now(),
+    is_active     BOOLEAN                  DEFAULT TRUE,
+    UNIQUE (username)
 );
 
--- Create Follows Table
-create table if not exists follows
+CREATE TABLE IF NOT EXISTS follows
 (
-    follower_id  uuid references users (id) on delete cascade,
-    following_id uuid references users (id) on delete cascade,
-    created_at   timestamp with time zone default now(),
-    primary key (follower_id, following_id) -- To ensure no duplicate follows
+    followers_id UUID REFERENCES users (id) ON DELETE CASCADE,
+    following_id UUID REFERENCES users (id) ON DELETE CASCADE,
+    followed_at  TIMESTAMP WITH TIME ZONE DEFAULT now(),
+    PRIMARY KEY (followers_id, following_id)
 );

@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS users
     phone      VARCHAR(13) UNIQUE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT now(),
-    deleted_at BIGINT                   DEFAULT 0
+    deleted_at BIGINT                   DEFAULT 0,
+    UNIQUE(email, deleted_at)
 );
 
 CREATE TABLE IF NOT EXISTS user_profile

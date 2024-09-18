@@ -1,0 +1,213 @@
+{"time":"2024-08-10T14:14:14.886235484+05:00","level":"ERROR","msg":"Error connecting to database","error":"pq: database \"medcian_auth\" does not exist"}
+{"time":"2024-08-10T14:34:52.071126244+05:00","level":"ERROR","msg":"Error login user","error":"must pass a pointer, not a value, to StructScan destination"}
+{"time":"2024-08-10T14:34:52.071621175+05:00","level":"ERROR","msg":"Error in AuthService.Login","error":"must pass a pointer, not a value, to StructScan destination"}
+{"time":"2024-08-10T14:39:27.100934226+05:00","level":"ERROR","msg":"Error registering user","error":"pq: invalid input value for enum gender: \"string\""}
+{"time":"2024-08-10T14:39:27.100985996+05:00","level":"ERROR","msg":"Error in AuthService.Register","error":"pq: invalid input value for enum gender: \"string\""}
+{"time":"2024-08-10T14:39:48.023474446+05:00","level":"ERROR","msg":"Error registering user","error":"pq: invalid input value for enum gender: \"mali\""}
+{"time":"2024-08-10T14:39:48.023508814+05:00","level":"ERROR","msg":"Error in AuthService.Register","error":"pq: invalid input value for enum gender: \"mali\""}
+{"time":"2024-08-10T14:39:59.165681534+05:00","level":"ERROR","msg":"Error registering user","error":"pq: invalid input value for enum gender: \"mail\""}
+{"time":"2024-08-10T14:39:59.165706704+05:00","level":"ERROR","msg":"Error in AuthService.Register","error":"pq: invalid input value for enum gender: \"mail\""}
+{"time":"2024-08-10T14:40:45.84243271+05:00","level":"ERROR","msg":"Error login user","error":"must pass a pointer, not a value, to StructScan destination"}
+{"time":"2024-08-10T14:40:45.842491113+05:00","level":"ERROR","msg":"Error in AuthService.Login","error":"must pass a pointer, not a value, to StructScan destination"}
+{"time":"2024-08-10T14:41:07.097070443+05:00","level":"ERROR","msg":"Error login user","error":"must pass a pointer, not a value, to StructScan destination"}
+{"time":"2024-08-10T14:41:07.097128245+05:00","level":"ERROR","msg":"Error in AuthService.Login","error":"must pass a pointer, not a value, to StructScan destination"}
+{"time":"2024-08-10T14:42:44.221286408+05:00","level":"ERROR","msg":"Error login user","error":"must pass a pointer, not a value, to StructScan destination"}
+{"time":"2024-08-10T14:42:44.221488555+05:00","level":"ERROR","msg":"Error in AuthService.Login","error":"must pass a pointer, not a value, to StructScan destination"}
+{"time":"2024-08-10T22:43:37.182927839+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T11:58:47.483539847+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:01:01.485858934+05:00","level":"ERROR","msg":"Error login user","error":"user not found"}
+{"time":"2024-08-11T12:01:01.485921031+05:00","level":"ERROR","msg":"Error in AuthService.Login","error":"user not found"}
+{"time":"2024-08-11T12:05:59.926584815+05:00","level":"ERROR","msg":"Error in GetUserProfile","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-08-11T12:07:10.224215323+05:00","level":"ERROR","msg":"Error in GetUserProfile","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-08-11T12:09:42.906784008+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:11:22.406770771+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:11:40.251698015+05:00","level":"ERROR","msg":"Error in GetUserProfile","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-08-11T12:12:32.026835492+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:13:03.288431534+05:00","level":"ERROR","msg":"Error in GetUserProfile","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-08-11T12:13:55.027238221+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:14:25.284664376+05:00","level":"ERROR","msg":"Error in GetUserProfile","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-08-11T12:17:36.276233901+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:21:42.002867176+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:25:56.665130103+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:30:35.040257426+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:31:26.550447866+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:33:06.995005485+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:35:46.29432795+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:37:14.951809479+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:42:42.81990685+05:00","level":"ERROR","msg":"Error in GetAllUsers","error":"sql: converting argument $1 type: unsupported type []interface {}, a slice of interface"}
+{"time":"2024-08-11T12:44:29.051574871+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:44:33.804704962+05:00","level":"ERROR","msg":"Error in GetAllUsers","error":"sql: converting argument $1 type: unsupported type []interface {}, a slice of interface"}
+{"time":"2024-08-11T12:44:43.714743139+05:00","level":"ERROR","msg":"Error in GetAllUsers","error":"sql: converting argument $1 type: unsupported type []interface {}, a slice of interface"}
+{"time":"2024-08-11T12:45:02.295666769+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:45:07.20325152+05:00","level":"ERROR","msg":"Error in GetAllUsers","error":"sql: converting argument $1 type: unsupported type []interface {}, a slice of interface"}
+{"time":"2024-08-11T12:53:50.002986969+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:54:05.425229943+05:00","level":"ERROR","msg":"Error in GetAllUsers","error":"sql: converting argument $1 type: unsupported type []interface {}, a slice of interface"}
+{"time":"2024-08-11T12:55:25.462333951+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:55:26.984906525+05:00","level":"ERROR","msg":"Error in GetAllUsers","error":"sql: converting argument $1 type: unsupported type []interface {}, a slice of interface"}
+{"time":"2024-08-11T12:57:08.379086701+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-11T12:58:54.545278328+05:00","level":"ERROR","msg":"Error in CreateUser","error":"pq: duplicate key value violates unique constraint \"users_email_key\""}
+{"time":"2024-08-12T16:37:57.384955365+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-12T16:38:54.593555995+05:00","level":"ERROR","msg":"Error login user","error":"user not found"}
+{"time":"2024-08-12T16:38:54.593602409+05:00","level":"ERROR","msg":"Error in AuthService.Login","error":"user not found"}
+{"time":"2024-08-12T19:43:11.499272622+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-12T22:57:04.002202782+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-12T23:45:34.653814038+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-13T00:56:10.225076128+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-13T03:53:16.522178643+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-13T13:55:20.928957946+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-13T16:50:02.682524249+05:00","level":"ERROR","msg":"Error connecting to database","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-08-13T17:16:27.852160936+05:00","level":"ERROR","msg":"Error connecting to database","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-08-13T17:16:27.852160855+05:00","level":"ERROR","msg":"Error connecting to database","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-08-13T17:16:37.710491463+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T09:15:19.014339686+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T09:30:15.439881795+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T11:59:41.379201609+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T12:02:03.013668269+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T12:03:32.823118878+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T12:04:07.776266671+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T12:04:27.004331673+05:00","level":"ERROR","msg":"Error in Adding admin","error":"sql: no rows in result set"}
+{"time":"2024-08-14T12:05:30.512684972+05:00","level":"ERROR","msg":"Error in Adding admin","error":"pq: INSERT has more target columns than expressions"}
+{"time":"2024-08-14T12:06:13.054528741+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T12:06:35.517943676+05:00","level":"ERROR","msg":"Error login user","error":"user not found"}
+{"time":"2024-08-14T12:06:35.517968394+05:00","level":"ERROR","msg":"Error in AuthService.Login","error":"user not found"}
+{"time":"2024-08-14T18:19:28.224219956+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T18:22:49.597909049+05:00","level":"ERROR","msg":"Error login user","error":"user not found"}
+{"time":"2024-08-14T18:22:49.598066811+05:00","level":"ERROR","msg":"Error in AuthService.Login","error":"user not found"}
+{"time":"2024-08-14T18:24:23.656960089+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T18:25:29.16686627+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T18:28:16.928585667+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-14T18:28:55.68011607+05:00","level":"INFO","msg":"gRPC server listening on :50050"}
+{"time":"2024-08-18T22:55:39.118961145+05:00","level":"ERROR","msg":"Error connecting to database","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-08-28T15:39:17.183025237+05:00","level":"ERROR","msg":"Error connecting to database","error":"sql: unknown driver \"postgres\" (forgotten import?)"}
+{"time":"2024-08-28T15:39:38.139875502+05:00","level":"ERROR","msg":"Error connecting to database","error":"sql: unknown driver \"postgres\" (forgotten import?)"}
+{"time":"2024-08-28T15:40:17.941201844+05:00","level":"ERROR","msg":"Error connecting to database","error":"sql: unknown driver \"postgres\" (forgotten import?)"}
+{"time":"2024-08-28T15:41:25.399574286+05:00","level":"ERROR","msg":"Error connecting to database","error":"sql: unknown driver \"postgres\" (forgotten import?)"}
+{"time":"2024-08-28T15:41:56.637947409+05:00","level":"ERROR","msg":"Error connecting to database","error":"sql: unknown driver \"postgres\" (forgotten import?)"}
+{"time":"2024-08-29T13:36:56.900828262+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-08-29T13:37:57.185100633+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-08-30T20:14:38.422578834+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-04T20:15:20.605798423+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-04T20:15:44.400576346+05:00","level":"ERROR","msg":"Error in Set","err":"dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-04T20:15:44.40068724+05:00","level":"ERROR","msg":"Failed to register user","!BADKEY":"failed to set code in Redis: dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:11:22.594936932+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T17:11:49.340849863+05:00","level":"ERROR","msg":"Error in Set","err":"dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:11:49.340941756+05:00","level":"ERROR","msg":"Failed to register user","!BADKEY":"failed to set code in Redis: dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:12:06.539269482+05:00","level":"ERROR","msg":"Failed to login","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:12:06.539314096+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:12:26.027417777+05:00","level":"ERROR","msg":"Failed to login","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:12:26.027471528+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:13:04.279078969+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T17:13:08.018805334+05:00","level":"ERROR","msg":"Failed to login","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:13:08.018865238+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:13:08.718351051+05:00","level":"ERROR","msg":"Failed to login","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:13:08.718412367+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:13:31.503289491+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T17:13:43.889822314+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
+{"time":"2024-09-05T17:13:43.889848674+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
+{"time":"2024-09-05T17:14:01.046407609+05:00","level":"ERROR","msg":"Error in Set","err":"dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:14:01.046484073+05:00","level":"ERROR","msg":"Failed to register user","!BADKEY":"failed to set code in Redis: dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:14:43.066777083+05:00","level":"ERROR","msg":"Error in GetRegister","err":"dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:14:43.066811789+05:00","level":"ERROR","msg":"Failed to get register from redis","error":"dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-05T17:15:46.870448096+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T17:15:54.859662533+05:00","level":"INFO","msg":"Successfully saved to redis"}
+{"time":"2024-09-05T18:01:05.439706213+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T20:02:21.150970569+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T20:07:28.329223963+05:00","level":"ERROR","msg":"Invalid email provided","!BADKEY":"invalid format"}
+{"time":"2024-09-05T20:07:47.491525085+05:00","level":"INFO","msg":"Successfully saved to redis"}
+{"time":"2024-09-05T20:30:20.995250219+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T20:30:28.049862836+05:00","level":"ERROR","msg":"failed to change password","error":"password is incorrect"}
+{"time":"2024-09-05T20:30:59.117147599+05:00","level":"ERROR","msg":"failed to change password","error":"password is incorrect"}
+{"time":"2024-09-05T20:31:24.1682351+05:00","level":"ERROR","msg":"failed to change password","error":"password is incorrect"}
+{"time":"2024-09-05T20:32:11.373691385+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T20:32:33.929606158+05:00","level":"ERROR","msg":"Invalid password"}
+{"time":"2024-09-05T20:32:33.92966499+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}
+{"time":"2024-09-05T20:44:58.45774605+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T20:45:30.21492315+05:00","level":"ERROR","msg":"Invalid password"}
+{"time":"2024-09-05T20:45:30.215013991+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}
+{"time":"2024-09-05T20:46:57.565317941+05:00","level":"ERROR","msg":"Invalid password"}
+{"time":"2024-09-05T20:46:57.565389185+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}
+{"time":"2024-09-05T20:48:32.76641943+05:00","level":"ERROR","msg":"Invalid password"}
+{"time":"2024-09-05T20:48:32.766502345+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}
+{"time":"2024-09-05T20:49:55.150216316+05:00","level":"ERROR","msg":"failed to delete user","error":"failed to mark user as deleted: pq: invalid input syntax for type uuid: \"{user_id}\""}
+{"time":"2024-09-05T20:50:41.808031306+05:00","level":"ERROR","msg":"failed to delete user","error":"failed to mark user as deleted: pq: invalid input syntax for type uuid: \"{user_id}\""}
+{"time":"2024-09-05T20:57:45.56480741+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T20:57:47.142346319+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
+{"time":"2024-09-05T20:57:47.142387624+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
+{"time":"2024-09-05T20:57:48.965798284+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
+{"time":"2024-09-05T20:57:48.965858394+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
+{"time":"2024-09-05T21:03:43.967871443+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T21:13:29.962641871+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T21:15:17.739898888+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T21:16:06.235412482+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T21:17:31.135436634+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T21:22:16.7604186+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T21:26:17.656139752+05:00","level":"ERROR","msg":"failed to get user","error":"pq: invalid input syntax for type uuid: \"{user_id}\""}
+{"time":"2024-09-05T21:28:03.969994095+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T21:29:06.869396886+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T21:29:25.034285812+05:00","level":"ERROR","msg":"failed to get user","error":"sql: no rows in result set"}
+{"time":"2024-09-05T21:32:53.279291389+05:00","level":"ERROR","msg":"failed to follow","error":"pq: invalid input syntax for type uuid: \"string\""}
+{"time":"2024-09-05T23:30:15.985106181+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T23:32:49.67011912+05:00","level":"ERROR","msg":"Invalid password"}
+{"time":"2024-09-05T23:32:49.67018424+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}
+{"time":"2024-09-05T23:46:11.753109644+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T23:55:22.192554418+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-05T23:55:26.214676852+05:00","level":"ERROR","msg":"Invalid password"}
+{"time":"2024-09-05T23:55:26.214749963+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}
+{"time":"2024-09-06T00:01:08.912436428+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-06T00:04:40.627451538+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-06T00:22:45.753464067+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-06T01:11:22.917521804+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-06T01:11:30.402112951+05:00","level":"ERROR","msg":"failed to list followers","error":"pq: invalid input syntax for type uuid: \"stringes\""}
+{"time":"2024-09-06T01:11:47.803013887+05:00","level":"ERROR","msg":"failed to list following","error":"pq: invalid input syntax for type uuid: \"stringes\""}
+{"time":"2024-09-06T01:15:33.564713609+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-06T16:47:52.42973135+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-06T16:59:45.402132563+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-06T16:59:56.832388344+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
+{"time":"2024-09-06T16:59:56.832469287+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
+{"time":"2024-09-06T17:10:28.716733508+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
+{"time":"2024-09-06T17:10:28.716791738+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
+{"time":"2024-09-18T17:08:15.269738117+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:24:46.928591724+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:25:56.028657061+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:26:02.179578503+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:26:25.152955844+05:00","level":"INFO","msg":"Successfully saved to redis"}
+{"time":"2024-09-18T17:26:54.906183267+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: duplicate key value violates unique constraint \"users_phone_key\""}
+{"time":"2024-09-18T17:26:54.906293575+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: duplicate key value violates unique constraint \"users_phone_key\""}
+{"time":"2024-09-18T17:27:31.25637245+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:27:45.613852546+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
+{"time":"2024-09-18T17:27:45.61390278+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
+{"time":"2024-09-18T17:44:25.132746096+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:45:12.455038714+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:45:19.105188685+05:00","level":"INFO","msg":"RegisterStudent handler called."}
+{"time":"2024-09-18T17:45:20.590194714+05:00","level":"ERROR","msg":"Failed to register admin","error":"sql: Scan error on column index 0, name \"id\": destination not a pointer"}
+{"time":"2024-09-18T17:45:20.590261901+05:00","level":"ERROR","msg":"Error registering ADMIN","!BADKEY":"sql: Scan error on column index 0, name \"id\": destination not a pointer"}
+{"time":"2024-09-18T17:45:53.066069978+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:45:55.412420066+05:00","level":"INFO","msg":"RegisterStudent handler called."}
+{"time":"2024-09-18T17:45:56.889342118+05:00","level":"ERROR","msg":"Failed to register admin","error":"pq: duplicate key value violates unique constraint \"users_email_key\""}
+{"time":"2024-09-18T17:45:56.889387663+05:00","level":"ERROR","msg":"Error registering ADMIN","!BADKEY":"pq: duplicate key value violates unique constraint \"users_email_key\""}
+{"time":"2024-09-18T17:46:26.089945596+05:00","level":"INFO","msg":"RegisterStudent handler called."}
+{"time":"2024-09-18T17:46:27.573517935+05:00","level":"INFO","msg":"Successfully registered user"}
+{"time":"2024-09-18T17:47:39.080105486+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:47:40.935747805+05:00","level":"INFO","msg":"RegisterStudent handler called."}
+{"time":"2024-09-18T17:47:42.405073327+05:00","level":"INFO","msg":"Successfully registered user"}
+{"time":"2024-09-18T17:47:44.817458174+05:00","level":"INFO","msg":"RegisterStudent handler called."}
+{"time":"2024-09-18T17:47:46.277987647+05:00","level":"INFO","msg":"Successfully registered user"}
+{"time":"2024-09-18T17:48:19.363894183+05:00","level":"ERROR","msg":"Invalid password"}
+{"time":"2024-09-18T17:48:19.36397243+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}
+{"time":"2024-09-18T17:49:13.694731018+05:00","level":"INFO","msg":"ForgotPassword is working"}
+{"time":"2024-09-18T17:49:13.694863788+05:00","level":"INFO","msg":"Getting user user by email"}
+{"time":"2024-09-18T17:49:15.30386168+05:00","level":"INFO","msg":"ForgotPassword succeeded"}
+{"time":"2024-09-18T17:55:50.417980389+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:56:37.732687524+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-18T17:57:38.661526705+05:00","level":"INFO","msg":"ForgotPassword is working"}
+{"time":"2024-09-18T17:57:38.661820409+05:00","level":"INFO","msg":"Getting user user by email"}
+{"time":"2024-09-18T17:57:40.015119371+05:00","level":"INFO","msg":"ForgotPassword succeeded"}
+{"time":"2024-09-18T17:58:18.929856927+05:00","level":"INFO","msg":"ResetPassword is working"}
+{"time":"2024-09-18T17:58:18.930327544+05:00","level":"ERROR","msg":"no code found for email","email":"ozojon160605@gmail.com"}
+{"time":"2024-09-18T17:58:18.930365685+05:00","level":"ERROR","msg":"no code found for email: ozojon160605@gmail.com"}
+{"time":"2024-09-18T17:58:33.181038695+05:00","level":"INFO","msg":"ResetPassword is working"}
+{"time":"2024-09-18T17:58:33.181474786+05:00","level":"ERROR","msg":"Invalid code"}
+{"time":"2024-09-18T17:58:45.361688007+05:00","level":"INFO","msg":"ResetPassword is working"}
+{"time":"2024-09-18T17:58:45.362253202+05:00","level":"INFO","msg":"Getting user user by email"}
+{"time":"2024-09-18T17:59:14.447283227+05:00","level":"ERROR","msg":"Invalid password"}
+{"time":"2024-09-18T17:59:14.447333602+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}

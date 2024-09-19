@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS countries
     id           UUID DEFAULT gen_random_uuid(),
     city_name    VARCHAR UNIQUE ,
     country      country,
-    nationality  INTEGER PRIMARY KEY,
+    nationality  VARCHAR PRIMARY KEY,
     flag         VARCHAR
 );
 
@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS users
 
 CREATE TABLE IF NOT EXISTS follows
 (
-    followers_id  UUID REFERENCES users (id) ON DELETE CASCADE,
+    follower_id  UUID REFERENCES users (id) ON DELETE CASCADE,
     following_id  UUID REFERENCES users (id) ON DELETE CASCADE,
     followed_at   TIMESTAMP DEFAULT now(),
-    PRIMARY KEY (followers_id, following_id)
+    PRIMARY KEY (follower_id, following_id)
 );

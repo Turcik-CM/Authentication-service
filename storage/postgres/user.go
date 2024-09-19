@@ -7,10 +7,9 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"github.com/jmoiron/sqlx"
-
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v4"
+	"github.com/jmoiron/sqlx"
 
 	pb "auth-service/genproto/user"
 )
@@ -26,15 +25,9 @@ func NewUserRepo(db *sqlx.DB) storage.UserStorage {
 func (p *UserRepo) Create(req *pb.CreateRequest) (*pb.UserResponse, error) {
 	userID := uuid.New().String()
 
-	query := `INSERT INTO users (id, phone, email, password) VALUES ($1, $2, $3, $4) RETURNING id`
-	_, err := p.db.Exec(query, userID, req.Phone, req.Email, req.Password)
-	if err != nil {
-		return nil, err
-	}
-
-	profileQuery := `INSERT INTO user_profile (user_id, first_name, last_name, username, nationality, bio) 
-	                 VALUES ($1, $2, $3, $4, $5, $6)`
-	_, err = p.db.Exec(profileQuery, userID, req.FirstName, req.LastName, req.Username, req.Nationality, req.Bio)
+	query := `INSERT INTO users (id, phone, email, password, first_name, last_name, username, nationality, bio) 
+	          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`
+	_, err := p.db.Exec(query, userID, req.Phone, req.Email, req.Password, req.FirstName, req.LastName, req.Username, req.Nationality, req.Bio)
 	if err != nil {
 		return nil, err
 	}
@@ -43,16 +36,16 @@ func (p *UserRepo) Create(req *pb.CreateRequest) (*pb.UserResponse, error) {
 }
 
 func (p *UserRepo) GetProfile(req *pb.Id) (*pb.GetProfileResponse, error) {
-	query := `SELECT u.id, u.email, u.phone, p.first_name, p.last_name, p.username, p.nationality, p.bio, 
-	                   p.followers_count, p.following_count, p.posts_count
-	          FROM users u
-	          JOIN user_profile p ON u.id = p.user_id
-	          WHERE u.id = $1 and p.role != 'admin' and u.deleted_at = 0`
+	query := `SELECT id, email, phone, first_name, last_name, username, nationality, bio, 
+	                 (SELECT COUNT(*) FROM follows WHERE following_id = users.id) AS follower_count, 
+	                 (SELECT COUNT(*) FROM follows WHERE follower_id = users.id) AS following_count
+	          FROM users
+	          WHERE id = $1 AND role != 'admin' AND deleted_at = 0`
 
 	row := p.db.QueryRow(query, req.UserId)
 	var res pb.GetProfileResponse
 	err := row.Scan(&res.UserId, &res.Email, &res.PhoneNumber, &res.FirstName, &res.LastName, &res.Username, &res.Nationality,
-		&res.Bio, &res.FollowersCount, &res.FollowingCount, &res.PostsCount)
+		&res.Bio, &res.FollowersCount, &res.FollowingCount)
 	if err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, errors.New("user not found")
@@ -64,9 +57,9 @@ func (p *UserRepo) GetProfile(req *pb.Id) (*pb.GetProfileResponse, error) {
 }
 
 func (p *UserRepo) UpdateProfile(req *pb.UpdateProfileRequest) (*pb.UserResponse, error) {
-	query := `UPDATE user_profile 
+	query := `UPDATE users 
 	          SET first_name = $1, last_name = $2, username = $3, nationality = $4, bio = $5, profile_image = $6, updated_at = now()
-	          WHERE user_id = $7 RETURNING user_id`
+	          WHERE id = $7 RETURNING id`
 
 	_, err := p.db.Exec(query, req.FirstName, req.LastName, req.Username, req.Nationality, req.Bio, req.ProfileImage, req.UserId)
 	if err != nil {
@@ -77,7 +70,7 @@ func (p *UserRepo) UpdateProfile(req *pb.UpdateProfileRequest) (*pb.UserResponse
 }
 
 func (p *UserRepo) ChangePassword(req *pb.ChangePasswordRequest) (*pb.ChangePasswordResponse, error) {
-	query := `SELECT password FROM users WHERE id = $1 and deleted_at = 0`
+	query := `SELECT password FROM users WHERE id = $1 AND deleted_at = 0`
 
 	row := p.db.QueryRow(query, req.UserId)
 	var password string
@@ -102,7 +95,7 @@ func (p *UserRepo) ChangePassword(req *pb.ChangePasswordRequest) (*pb.ChangePass
 }
 
 func (p *UserRepo) ChangeProfileImage(req *pb.URL) (*pb.Void, error) {
-	query := `UPDATE user_profile SET profile_image = $1, updated_at = now() WHERE user_id = $2`
+	query := `UPDATE users SET profile_image = $1, updated_at = now() WHERE id = $2`
 	_, err := p.db.Exec(query, req.Url, req.UserId)
 	if err != nil {
 		return nil, err
@@ -112,10 +105,9 @@ func (p *UserRepo) ChangeProfileImage(req *pb.URL) (*pb.Void, error) {
 }
 
 func (p *UserRepo) FetchUsers(req *pb.Filter) (*pb.UserResponses, error) {
-	query := `SELECT u.id, u.email, p.first_name, p.last_name, p.username, u.created_at
-	          FROM users u
-	          JOIN user_profile p ON u.id = p.user_id
-	          WHERE p.username ILIKE $1 and p.role = 'user'
+	query := `SELECT id, email, first_name, last_name, username, created_at
+	          FROM users
+	          WHERE username ILIKE $1 AND role = 'user'
 	          LIMIT $2 OFFSET $3`
 
 	rows, err := p.db.Query(query, req.FirstName, req.Limit, (req.Page-1)*req.Limit)
@@ -140,9 +132,9 @@ func (p *UserRepo) ListOfFollowing(req *pb.Id) (*pb.Followings, error) {
 	followings := &pb.Followings{}
 
 	query := `
-		SELECT p.username
+		SELECT u.username
 		FROM follows f
-		JOIN user_profile p ON f.following_id = p.user_id
+		JOIN users u ON f.following_id = u.id
 		WHERE f.follower_id = $1;
     `
 
@@ -171,11 +163,11 @@ func (p *UserRepo) ListOfFollowingByUsername(req *pb.Id) (*pb.Followings, error)
 	followings := &pb.Followings{}
 
 	query := `
-		SELECT p2.username AS following_username
+		SELECT u2.username AS following_username
 		FROM follows f
-		JOIN user_profile p1 ON f.follower_id = p1.user_id
-		JOIN user_profile p2 ON f.following_id = p2.user_id
-		WHERE p1.username = $1;
+		JOIN users u1 ON f.follower_id = u1.id
+		JOIN users u2 ON f.following_id = u2.id
+		WHERE u1.username = $1;
     `
 
 	rows, err := p.db.Query(query, req.UserId)
@@ -202,11 +194,11 @@ func (p *UserRepo) ListOfFollowingByUsername(req *pb.Id) (*pb.Followings, error)
 func (p *UserRepo) ListOfFollowersByUsername(req *pb.Id) (*pb.Followers, error) {
 	followers := &pb.Followers{}
 	query := `
-		SELECT p2.username AS follower_username
+		SELECT u2.username AS follower_username
 		FROM follows f
-		JOIN user_profile p1 ON f.following_id = p1.user_id
-		JOIN user_profile p2 ON f.follower_id = p2.user_id
-		WHERE p1.username = $1;
+		JOIN users u1 ON f.following_id = u1.id
+		JOIN users u2 ON f.follower_id = u2.id
+		WHERE u1.username = $1;
     `
 
 	rows, err := p.db.Query(query, req.UserId)
@@ -233,9 +225,9 @@ func (p *UserRepo) ListOfFollowersByUsername(req *pb.Id) (*pb.Followers, error) 
 func (p *UserRepo) ListOfFollowers(req *pb.Id) (*pb.Followers, error) {
 	followers := &pb.Followers{}
 	query := `
-		SELECT p.username
+		SELECT u.username
 		FROM follows f
-		JOIN user_profile p ON f.follower_id = p.user_id
+		JOIN users u ON f.follower_id = u.id
 		WHERE f.following_id = $1;
     `
 
@@ -274,9 +266,9 @@ func (p *UserRepo) DeleteUser(req *pb.Id) (*pb.Void, error) {
 // ----------------------------------------------------------------------------------------
 
 func (p *UserRepo) Follow(in *pb.FollowReq) (*pb.FollowRes, error) {
-	query := `INSERT INTO follows (follower_id, following_id, created_at)
+	query := `INSERT INTO follows (follower_id, following_id, followed_at)
 	          VALUES ($1, $2, NOW())
-	          RETURNING follower_id, following_id, created_at`
+	          RETURNING follower_id, following_id, followed_at`
 
 	var res pb.FollowRes
 	err := p.db.QueryRowContext(context.Background(), query, in.FollowerId, in.FollowingId).Scan(
@@ -298,7 +290,7 @@ func (p *UserRepo) Unfollow(in *pb.FollowReq) (*pb.DFollowRes, error) {
 		&res.FollowerId, &res.FollowingId)
 
 	if err != nil {
-		if err == sql.ErrNoRows {
+		if errors.Is(err, sql.ErrNoRows) {
 			return nil, fmt.Errorf("no such follow relation exists")
 		}
 		return nil, err
@@ -336,7 +328,9 @@ func (p *UserRepo) MostPopularUser(in *pb.Void) (*pb.UserResponse, error) {
 		userID string
 	)
 
-	query := `SELECT follower_id FROM follows ORDER BY follower_id DESC LIMIT 1`
+	query := `SELECT follower_id FROM follows
+	          GROUP BY follower_id
+	          ORDER BY COUNT(*) DESC LIMIT 1`
 
 	var user pb.UserResponse
 	err := p.db.QueryRow(query).Scan(&userID)
@@ -344,10 +338,9 @@ func (p *UserRepo) MostPopularUser(in *pb.Void) (*pb.UserResponse, error) {
 		return nil, fmt.Errorf("failed to get most popular user: %w", err)
 	}
 
-	query1 := `SELECT u.id, u.email, u.phone, p.first_name, p.last_name, p.username, p.nationality, p.bio, p.created_at
-	          FROM users u
-	          JOIN user_profile p ON u.id = p.user_id
-	          WHERE u.id = $1 and role != 'c-admin' and u.deleted_at = 0`
+	query1 := `SELECT id, email, phone, first_name, last_name, username, nationality, bio, created_at
+	          FROM users
+	          WHERE id = $1 AND role != 'c-admin' AND deleted_at = 0`
 
 	row := p.db.QueryRow(query1, userID)
 	err = row.Scan(&user.Id, &user.Email, &user.Phone, &user.FirstName, &user.LastName, &user.Username, &user.Nationality,

@@ -211,3 +211,20 @@
 {"time":"2024-09-18T17:58:45.362253202+05:00","level":"INFO","msg":"Getting user user by email"}
 {"time":"2024-09-18T17:59:14.447283227+05:00","level":"ERROR","msg":"Invalid password"}
 {"time":"2024-09-18T17:59:14.447333602+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}
+{"time":"2024-09-20T15:54:08.60686822+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-20T15:55:31.684563839+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-20T15:56:21.559791451+05:00","level":"INFO","msg":"Successfully saved to redis"}
+{"time":"2024-09-20T15:57:25.960605035+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: password authentication failed for user \"postgres\""}
+{"time":"2024-09-20T15:57:25.960641011+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: password authentication failed for user \"postgres\""}
+{"time":"2024-09-20T15:57:48.076472187+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-20T15:57:51.238790946+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T15:57:51.238822132+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:00:30.410074239+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:00:30.41016465+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:01:07.980017797+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:01:07.980051139+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:02:02.290125859+05:00","level":"ERROR","msg":"Error in GetRegister","err":"redis: nil"}
+{"time":"2024-09-20T16:02:02.290186408+05:00","level":"ERROR","msg":"Failed to get register from redis","error":"redis: nil"}
+{"time":"2024-09-20T16:02:17.416393405+05:00","level":"INFO","msg":"Successfully saved to redis"}
+{"time":"2024-09-20T16:06:05.066107158+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
+{"time":"2024-09-20T16:06:05.066151888+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}

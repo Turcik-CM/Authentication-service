@@ -1,13 +1,13 @@
 package models
 
 type RegisterRequest struct {
+	Email       string `json:"email" db:"email"`
+	Phone       string `json:"phone" db:"phone"`
 	FirstName   string `json:"first_name" db:"first_name"`
 	LastName    string `json:"last_name" db:"last_name"`
-	Email       string `json:"email" db:"email"`
-	Password    string `json:"password" db:"password"`
-	Phone       string `json:"phone" db:"phone"`
 	Username    string `json:"username" db:"username"`
 	Nationality string `json:"nationality" db:"nationality"`
+	Password    string `json:"password" db:"password"`
 	Bio         string `json:"bio" db:"bio"`
 }
 type RegisterRequest1 struct {

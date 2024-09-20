@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS users
     username       VARCHAR,
     nationality    VARCHAR REFERENCES countries(nationality),
     bio            VARCHAR,
-    role           role,
+    role           role DEFAULT 'user',
     profile_image  VARCHAR DEFAULT 'no image',
     created_at     TIMESTAMP DEFAULT now(),
     updated_at     TIMESTAMP DEFAULT now(),

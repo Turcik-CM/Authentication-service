@@ -39,11 +39,12 @@ type LoginEmailRequest struct {
 }
 
 type LoginResponse struct {
-	Id       string `json:"id" db:"id"`
-	Email    string `json:"email" db:"email"`
-	Username string `json:"username" db:"username"`
-	Password string `json:"password" db:"password"`
-	Role     string `json:"role" db:"role"`
+	Id          string `json:"id" db:"id"`
+	Email       string `json:"email" db:"email"`
+	Username    string `json:"username" db:"username"`
+	Password    string `json:"password" db:"password"`
+	Role        string `json:"role" db:"role"`
+	Nationality string `json:"nationality" db:"nationality"`
 }
 
 type LoginUsernameRequest struct {

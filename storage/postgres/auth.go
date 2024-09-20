@@ -86,9 +86,9 @@ func (a *AuthRepo) LoginUsername(in models.LoginUsernameRequest) (models.LoginRe
 
 // RegisterAdmin creates a new admin user
 func (a *AuthRepo) RegisterAdmin(ctx context.Context, pass string) error {
-	query := `INSERT INTO users (email, password, role,first_name,last_name) VALUES ($1, $2, $3) RETURNING id`
+	query := `INSERT INTO users (email, password, role,first_name,last_name,username) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`
 	var id string
-	err := a.db.QueryRow(query, "admiN", pass, "c-admin", "adminchikov", "admin").Scan(&id)
+	err := a.db.QueryRow(query, "admiN", pass, "c-admin", "adminchikov", "admin", "admin").Scan(&id)
 	if err != nil {
 		return err
 	}

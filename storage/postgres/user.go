@@ -128,124 +128,35 @@ func (p *UserRepo) FetchUsers(req *pb.Filter) (*pb.UserResponses, error) {
 	return &pb.UserResponses{Users: users}, nil
 }
 
-func (p *UserRepo) ListOfFollowing(req *pb.Id) (*pb.Followings, error) {
-	followings := &pb.Followings{}
+func (p *UserRepo) ListOfFollowing(req *pb.Id) (*pb.Follows, error) {
+	followings := &pb.Follows{}
 
 	query := `
-		SELECT u.username
+		SELECT u.username, u.id
 		FROM follows f
 		JOIN users u ON f.following_id = u.id
 		WHERE f.follower_id = $1;
     `
 
-	rows, err := p.db.Query(query, req.UserId)
+	err := p.db.Select(&followings, query, req.UserId)
 	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var followingID string
-		if err := rows.Scan(&followingID); err != nil {
-			return nil, err
-		}
-		followings.Following = append(followings.Following, followingID)
-	}
-
-	if err := rows.Err(); err != nil {
 		return nil, err
 	}
 
 	return followings, nil
 }
 
-func (p *UserRepo) ListOfFollowingByUsername(req *pb.Id) (*pb.Followings, error) {
-	followings := &pb.Followings{}
-
+func (p *UserRepo) ListOfFollowers(req *pb.Id) (*pb.Follows, error) {
+	followers := &pb.Follows{}
 	query := `
-		SELECT u2.username AS following_username
-		FROM follows f
-		JOIN users u1 ON f.follower_id = u1.id
-		JOIN users u2 ON f.following_id = u2.id
-		WHERE u1.username = $1;
-    `
-
-	rows, err := p.db.Query(query, req.UserId)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var followingUsername string
-		if err := rows.Scan(&followingUsername); err != nil {
-			return nil, err
-		}
-		followings.Following = append(followings.Following, followingUsername)
-	}
-
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-
-	return followings, nil
-}
-
-func (p *UserRepo) ListOfFollowersByUsername(req *pb.Id) (*pb.Followers, error) {
-	followers := &pb.Followers{}
-	query := `
-		SELECT u2.username AS follower_username
-		FROM follows f
-		JOIN users u1 ON f.following_id = u1.id
-		JOIN users u2 ON f.follower_id = u2.id
-		WHERE u1.username = $1;
-    `
-
-	rows, err := p.db.Query(query, req.UserId)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var followerUsername string
-		if err := rows.Scan(&followerUsername); err != nil {
-			return nil, err
-		}
-		followers.Followers = append(followers.Followers, followerUsername)
-	}
-
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-
-	return followers, nil
-}
-
-func (p *UserRepo) ListOfFollowers(req *pb.Id) (*pb.Followers, error) {
-	followers := &pb.Followers{}
-	query := `
-		SELECT u.username
+		SELECT u.username, u.id
 		FROM follows f
 		JOIN users u ON f.follower_id = u.id
 		WHERE f.following_id = $1;
     `
 
-	rows, err := p.db.Query(query, req.UserId)
+	err := p.db.Select(&followers, query, req.UserId)
 	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var followerID string
-		if err := rows.Scan(&followerID); err != nil {
-			return nil, err
-		}
-		followers.Followers = append(followers.Followers, followerID)
-	}
-
-	if err := rows.Err(); err != nil {
 		return nil, err
 	}
 

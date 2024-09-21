@@ -22,10 +22,8 @@ type UserStorage interface {
 	ChangePassword(in *pb.ChangePasswordRequest) (*pb.ChangePasswordResponse, error)
 	ChangeProfileImage(in *pb.URL) (*pb.Void, error)
 	FetchUsers(in *pb.Filter) (*pb.UserResponses, error)
-	ListOfFollowing(in *pb.Id) (*pb.Followings, error)
-	ListOfFollowers(in *pb.Id) (*pb.Followers, error)
-	ListOfFollowingByUsername(req *pb.Id) (*pb.Followings, error)
-	ListOfFollowersByUsername(req *pb.Id) (*pb.Followers, error)
+	ListOfFollowing(in *pb.Id) (*pb.Follows, error)
+	ListOfFollowers(in *pb.Id) (*pb.Follows, error)
 	DeleteUser(in *pb.Id) (*pb.Void, error)
 
 	Follow(in *pb.FollowReq) (*pb.FollowRes, error)

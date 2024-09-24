@@ -2,10 +2,10 @@ CREATE TYPE role AS ENUM ('admin', 'user', 'c-admin');
 
 CREATE TABLE IF NOT EXISTS countries
 (
-    id           UUID DEFAULT gen_random_uuid(),
-    country      VARCHAR PRIMARY KEY,
-    nationality  VARCHAR,
-    flag         VARCHAR
+    id          UUID DEFAULT gen_random_uuid(),
+    country     VARCHAR PRIMARY KEY,
+    nationality VARCHAR,
+    flag        VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS users
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users
     first_name     VARCHAR NOT NULL ,
     last_name      VARCHAR NOT NULL ,
     username       VARCHAR,
-    nationality    VARCHAR REFERENCES countries(country),
+    country    VARCHAR REFERENCES countries(country),
     password       VARCHAR NOT NULL,
     bio            VARCHAR,
     role           role DEFAULT 'user',

@@ -228,3 +228,4 @@
 {"time":"2024-09-20T16:02:17.416393405+05:00","level":"INFO","msg":"Successfully saved to redis"}
 {"time":"2024-09-20T16:06:05.066107158+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
 {"time":"2024-09-20T16:06:05.066151888+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
+{"time":"2024-09-24T18:59:01.509404219+05:00","level":"INFO","msg":"Starting server on port :50050"}

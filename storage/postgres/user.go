@@ -25,7 +25,7 @@ func NewUserRepo(db *sqlx.DB) storage.UserStorage {
 func (p *UserRepo) Create(req *pb.CreateRequest) (*pb.UserResponse, error) {
 	userID := uuid.New().String()
 
-	query := `INSERT INTO users (id, phone, email, password, first_name, last_name, username, nationality, bio) 
+	query := `INSERT INTO users (id, phone, email, password, first_name, last_name, username, country, bio) 
 	          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`
 	_, err := p.db.Exec(query, userID, req.Phone, req.Email, req.Password, req.FirstName, req.LastName, req.Username, req.Nationality, req.Bio)
 	if err != nil {
@@ -36,7 +36,7 @@ func (p *UserRepo) Create(req *pb.CreateRequest) (*pb.UserResponse, error) {
 }
 
 func (p *UserRepo) GetProfile(req *pb.Id) (*pb.GetProfileResponse, error) {
-	query := `SELECT id, email, phone, first_name, last_name, username, nationality, bio, 
+	query := `SELECT id, email, phone, first_name, last_name, username, country, bio, 
 	                 (SELECT COUNT(*) FROM follows WHERE following_id = users.id) AS follower_count, 
 	                 (SELECT COUNT(*) FROM follows WHERE follower_id = users.id) AS following_count
 	          FROM users
@@ -58,7 +58,7 @@ func (p *UserRepo) GetProfile(req *pb.Id) (*pb.GetProfileResponse, error) {
 
 func (p *UserRepo) UpdateProfile(req *pb.UpdateProfileRequest) (*pb.UserResponse, error) {
 	query := `UPDATE users 
-	          SET first_name = $1, last_name = $2, username = $3, nationality = $4, bio = $5, profile_image = $6, updated_at = now()
+	          SET first_name = $1, last_name = $2, username = $3, country = $4, bio = $5, profile_image = $6, updated_at = now()
 	          WHERE id = $7 RETURNING id`
 
 	_, err := p.db.Exec(query, req.FirstName, req.LastName, req.Username, req.Nationality, req.Bio, req.ProfileImage, req.UserId)
@@ -249,7 +249,7 @@ func (p *UserRepo) MostPopularUser(in *pb.Void) (*pb.UserResponse, error) {
 		return nil, fmt.Errorf("failed to get most popular user: %w", err)
 	}
 
-	query1 := `SELECT id, email, phone, first_name, last_name, username, nationality, bio, created_at
+	query1 := `SELECT id, email, phone, first_name, last_name, username, country, bio, created_at
 	          FROM users
 	          WHERE id = $1 AND role != 'c-admin' AND deleted_at = 0`
 

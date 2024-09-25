@@ -229,3 +229,16 @@
 {"time":"2024-09-20T16:06:05.066107158+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
 {"time":"2024-09-20T16:06:05.066151888+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
 {"time":"2024-09-24T18:59:01.509404219+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T17:48:29.79014867+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T17:49:48.903808738+05:00","level":"INFO","msg":"RegisterStudent handler called."}
+{"time":"2024-09-25T17:49:50.382998446+05:00","level":"ERROR","msg":"Failed to register admin","error":"pq: password authentication failed for user \"postgres\""}
+{"time":"2024-09-25T17:49:50.383035686+05:00","level":"ERROR","msg":"Error registering ADMIN","!BADKEY":"pq: password authentication failed for user \"postgres\""}
+{"time":"2024-09-25T17:50:03.357044902+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T17:50:05.120476121+05:00","level":"INFO","msg":"RegisterStudent handler called."}
+{"time":"2024-09-25T17:50:06.58507991+05:00","level":"INFO","msg":"Successfully registered user"}
+{"time":"2024-09-25T17:50:39.673499946+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
+{"time":"2024-09-25T17:50:39.673538839+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
+{"time":"2024-09-25T18:08:42.254710236+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T18:44:48.573250961+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T18:52:58.3260465+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T18:55:35.927594501+05:00","level":"INFO","msg":"Starting server on port :50050"}

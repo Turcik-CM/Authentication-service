@@ -74,7 +74,7 @@ func (h *authHandler) Register(c *gin.Context) {
 		Email:       auth.Email,
 		Phone:       auth.Phone,
 		Username:    auth.Username,
-		Nationality: auth.Nationality,
+		Nationality: auth.Country,
 		Bio:         auth.Bio,
 		Password:    auth.Password,
 	}
@@ -125,14 +125,14 @@ func (h *authHandler) AcceptCodeToRegister(c *gin.Context) {
 	}
 
 	response, err := h.srv.Register(models.RegisterRequest{
-		FirstName:   register.FirstName,
-		LastName:    register.LastName,
-		Email:       register.Email,
-		Phone:       register.Phone,
-		Username:    register.Username,
-		Nationality: register.Nationality,
-		Bio:         register.Bio,
-		Password:    register.Password,
+		FirstName: register.FirstName,
+		LastName:  register.LastName,
+		Email:     register.Email,
+		Phone:     register.Phone,
+		Username:  register.Username,
+		Country:   register.Nationality,
+		Bio:       register.Bio,
+		Password:  register.Password,
 	})
 	if err != nil {
 		h.log.Error("Failed to register student", "error", err)

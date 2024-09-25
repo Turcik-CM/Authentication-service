@@ -9,7 +9,7 @@ import (
 
 func ConnectUser() (*sqlx.DB, error) {
 	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		"localhost", "5432", "postgres", "dodi", "auth_tw")
+		"localhost", "5432", "postgres", "123321", "turk_auth")
 
 	db, err := sqlx.Connect("postgres", psqlInfo)
 	if err != nil {
@@ -145,7 +145,6 @@ func TestFetchUsers(t *testing.T) {
 	}
 	user := NewUserRepo(db)
 	rst := pb.Filter{
-		Role:      "user",
 		Limit:     10,
 		Page:      1,
 		FirstName: "hamidullox4",

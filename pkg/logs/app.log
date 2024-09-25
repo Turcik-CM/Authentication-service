@@ -211,44 +211,21 @@
 {"time":"2024-09-18T17:58:45.362253202+05:00","level":"INFO","msg":"Getting user user by email"}
 {"time":"2024-09-18T17:59:14.447283227+05:00","level":"ERROR","msg":"Invalid password"}
 {"time":"2024-09-18T17:59:14.447333602+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"Invalid password"}
-{"time":"2024-09-20T16:47:19.647217511+05:00","level":"INFO","msg":"Starting server on port :50050"}
-{"time":"2024-09-20T16:47:42.881899967+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
-{"time":"2024-09-20T16:47:42.881934381+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
-{"time":"2024-09-20T16:47:52.158546881+05:00","level":"INFO","msg":"RegisterStudent handler called."}
-{"time":"2024-09-20T16:47:53.648588727+05:00","level":"ERROR","msg":"Failed to register admin","error":"pq: INSERT has more target columns than expressions"}
-{"time":"2024-09-20T16:47:53.648647076+05:00","level":"ERROR","msg":"Error registering ADMIN","!BADKEY":"pq: INSERT has more target columns than expressions"}
-{"time":"2024-09-20T16:48:06.38762312+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
-{"time":"2024-09-20T16:48:06.387658677+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
-{"time":"2024-09-20T16:49:29.772800713+05:00","level":"INFO","msg":"Starting server on port :50050"}
-{"time":"2024-09-20T16:49:31.363024944+05:00","level":"INFO","msg":"RegisterStudent handler called."}
-{"time":"2024-09-20T16:49:32.850914706+05:00","level":"INFO","msg":"Successfully registered user"}
-{"time":"2024-09-20T16:49:37.967255934+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
-{"time":"2024-09-20T16:49:37.967305836+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
-{"time":"2024-09-20T16:49:40.531530462+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
-{"time":"2024-09-20T16:49:40.531576227+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
-{"time":"2024-09-20T16:49:44.25096162+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
-{"time":"2024-09-20T16:49:44.251011122+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
-{"time":"2024-09-20T16:50:24.877685694+05:00","level":"ERROR","msg":"Failed to login","error":"sql: Scan error on column index 4, name \"username\": converting NULL to string is unsupported"}
-{"time":"2024-09-20T16:50:24.877726991+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: Scan error on column index 4, name \"username\": converting NULL to string is unsupported"}
-{"time":"2024-09-20T16:52:03.325820112+05:00","level":"INFO","msg":"Starting server on port :50050"}
-{"time":"2024-09-20T16:55:25.40532082+05:00","level":"INFO","msg":"Successfully saved to redis"}
-{"time":"2024-09-20T16:56:01.351304332+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
-{"time":"2024-09-20T16:56:01.351368894+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
-{"time":"2024-09-20T16:56:33.937718469+05:00","level":"INFO","msg":"Successfully saved to redis"}
-{"time":"2024-09-20T16:56:53.325612184+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
-{"time":"2024-09-20T16:56:53.325661918+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
-{"time":"2024-09-20T16:59:34.16818995+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
-{"time":"2024-09-20T16:59:34.168231548+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
-{"time":"2024-09-20T16:59:46.514866237+05:00","level":"INFO","msg":"Successfully saved to redis"}
-{"time":"2024-09-20T17:00:04.29927658+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
-{"time":"2024-09-20T17:00:04.299302768+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
-{"time":"2024-09-20T17:00:52.241499862+05:00","level":"INFO","msg":"Successfully saved to redis"}
-{"time":"2024-09-20T17:01:48.87941677+05:00","level":"INFO","msg":"ForgotPassword is working"}
-{"time":"2024-09-20T17:01:48.879528679+05:00","level":"INFO","msg":"Getting user user by email"}
-{"time":"2024-09-20T17:01:50.263518997+05:00","level":"INFO","msg":"ForgotPassword succeeded"}
-{"time":"2024-09-20T17:03:52.380064851+05:00","level":"INFO","msg":"ResetPassword is working"}
-{"time":"2024-09-20T17:03:52.380329126+05:00","level":"INFO","msg":"Getting user user by email"}
-{"time":"2024-09-20T17:04:18.875924501+05:00","level":"ERROR","msg":"Failed to login","error":"sql: Scan error on column index 3, name \"role\": converting NULL to string is unsupported"}
-{"time":"2024-09-20T17:04:18.875973633+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: Scan error on column index 3, name \"role\": converting NULL to string is unsupported"}
-{"time":"2024-09-20T17:04:22.506026925+05:00","level":"ERROR","msg":"Failed to login","error":"sql: Scan error on column index 3, name \"role\": converting NULL to string is unsupported"}
-{"time":"2024-09-20T17:04:22.506064966+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: Scan error on column index 3, name \"role\": converting NULL to string is unsupported"}
+{"time":"2024-09-20T15:54:08.60686822+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-20T15:55:31.684563839+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-20T15:56:21.559791451+05:00","level":"INFO","msg":"Successfully saved to redis"}
+{"time":"2024-09-20T15:57:25.960605035+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: password authentication failed for user \"postgres\""}
+{"time":"2024-09-20T15:57:25.960641011+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: password authentication failed for user \"postgres\""}
+{"time":"2024-09-20T15:57:48.076472187+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-20T15:57:51.238790946+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T15:57:51.238822132+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:00:30.410074239+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:00:30.41016465+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:01:07.980017797+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:01:07.980051139+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_nationality_fkey\""}
+{"time":"2024-09-20T16:02:02.290125859+05:00","level":"ERROR","msg":"Error in GetRegister","err":"redis: nil"}
+{"time":"2024-09-20T16:02:02.290186408+05:00","level":"ERROR","msg":"Failed to get register from redis","error":"redis: nil"}
+{"time":"2024-09-20T16:02:17.416393405+05:00","level":"INFO","msg":"Successfully saved to redis"}
+{"time":"2024-09-20T16:06:05.066107158+05:00","level":"ERROR","msg":"Failed to login","error":"sql: no rows in result set"}
+{"time":"2024-09-20T16:06:05.066151888+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
+{"time":"2024-09-24T18:59:01.509404219+05:00","level":"INFO","msg":"Starting server on port :50050"}

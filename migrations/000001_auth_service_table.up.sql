@@ -1,13 +1,11 @@
 CREATE TYPE role AS ENUM ('admin', 'user', 'c-admin');
-CREATE TYPE country AS ENUM('Azerbaijan', 'Kazakhstan', 'Kyrgyzstan', 'Turkey', 'Uzbekistan');
 
 CREATE TABLE IF NOT EXISTS countries
 (
-    id           UUID DEFAULT gen_random_uuid(),
-    city_name    VARCHAR UNIQUE ,
-    country      country,
-    nationality  VARCHAR PRIMARY KEY,
-    flag         VARCHAR
+    id          UUID DEFAULT gen_random_uuid(),
+    country     VARCHAR PRIMARY KEY,
+    nationality VARCHAR,
+    flag        VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS users
@@ -15,11 +13,11 @@ CREATE TABLE IF NOT EXISTS users
     id             UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email          VARCHAR UNIQUE,
     phone          VARCHAR(13) UNIQUE,
-    password       VARCHAR NOT NULL,
     first_name     VARCHAR NOT NULL ,
     last_name      VARCHAR NOT NULL ,
     username       VARCHAR,
-    nationality    VARCHAR REFERENCES countries(nationality),
+    country    VARCHAR REFERENCES countries(country),
+    password       VARCHAR NOT NULL,
     bio            VARCHAR,
     role           role DEFAULT 'user',
     profile_image  VARCHAR DEFAULT 'no image',

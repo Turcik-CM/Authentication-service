@@ -1,14 +1,14 @@
 package models
 
 type RegisterRequest struct {
-	FirstName   string `json:"first_name" db:"first_name"`
-	LastName    string `json:"last_name" db:"last_name"`
-	Email       string `json:"email" db:"email"`
-	Password    string `json:"password" db:"password"`
-	Phone       string `json:"phone" db:"phone"`
-	Username    string `json:"username" db:"username"`
-	Nationality string `json:"nationality" db:"nationality"`
-	Bio         string `json:"bio" db:"bio"`
+	Email     string `json:"email" db:"email"`
+	Phone     string `json:"phone" db:"phone"`
+	FirstName string `json:"first_name" db:"first_name"`
+	LastName  string `json:"last_name" db:"last_name"`
+	Username  string `json:"username" db:"username"`
+	Country   string `json:"country" db:"country"`
+	Password  string `json:"password" db:"password"`
+	Bio       string `json:"bio" db:"bio"`
 }
 type RegisterRequest1 struct {
 	FirstName   string `json:"first_name" db:"first_name"`
@@ -39,12 +39,11 @@ type LoginEmailRequest struct {
 }
 
 type LoginResponse struct {
-	Id          string `json:"id" db:"id"`
-	Email       string `json:"email" db:"email"`
-	Username    string `json:"username" db:"username"`
-	Password    string `json:"password" db:"password"`
-	Role        string `json:"role" db:"role"`
-	Nationality string `json:"nationality" db:"nationality"`
+	Id       string `json:"id" db:"id"`
+	Email    string `json:"email" db:"email"`
+	Username string `json:"username" db:"username"`
+	Password string `json:"password" db:"password"`
+	Role     string `json:"role" db:"role"`
 }
 
 type LoginUsernameRequest struct {

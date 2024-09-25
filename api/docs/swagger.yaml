@@ -40,13 +40,13 @@ definitions:
     properties:
       bio:
         type: string
+      country:
+        type: string
       email:
         type: string
       first_name:
         type: string
       last_name:
-        type: string
-      nationality:
         type: string
       password:
         type: string
@@ -57,21 +57,15 @@ definitions:
     type: object
   models.RegisterResponse:
     properties:
-      bio:
+      access_token:
         type: string
       email:
         type: string
-      first_name:
+      flag:
         type: string
       id:
         type: string
-      last_name:
-        type: string
-      nationality:
-        type: string
-      phone:
-        type: string
-      username:
+      refresh_token:
         type: string
     type: object
   models.ResetPassReq:

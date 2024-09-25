@@ -23,6 +23,7 @@ func NewAuthRepo(db *sqlx.DB) storage.AuthStorage {
 // Register a new user with data merged into the 'users' table
 func (a *AuthRepo) Register(in models.RegisterRequest) (models.RegisterResponse, error) {
 	var id string
+	var flag string
 	query := `INSERT INTO users (phone, email, password, first_name, last_name, username, country, bio) 
 			  VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
 			  RETURNING id`
@@ -31,15 +32,15 @@ func (a *AuthRepo) Register(in models.RegisterRequest) (models.RegisterResponse,
 		return models.RegisterResponse{}, err
 	}
 
+	err = a.db.Get(&flag, "SELECT flag FROM countries WHERE country = $1", in.Country)
+	if err != nil {
+		return models.RegisterResponse{}, err
+	}
+
 	return models.RegisterResponse{
-		Id:          id,
-		FirstName:   in.FirstName,
-		LastName:    in.LastName,
-		Email:       in.Email,
-		Phone:       in.Phone,
-		Username:    in.Username,
-		Nationality: in.Country,
-		Bio:         in.Bio,
+		Id:    id,
+		Email: in.Email,
+		Flag:  flag,
 	}, nil
 }
 

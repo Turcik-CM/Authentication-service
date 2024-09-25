@@ -3,6 +3,7 @@ package handler
 import (
 	"auth-service/api/email"
 	"auth-service/pkg/models"
+	"auth-service/pkg/token"
 	"auth-service/service"
 	"auth-service/storage/redis"
 	"context"
@@ -69,14 +70,14 @@ func (h *authHandler) Register(c *gin.Context) {
 		return
 	}
 	req1 := models.RegisterRequest1{
-		FirstName:   auth.FirstName,
-		LastName:    auth.LastName,
-		Email:       auth.Email,
-		Phone:       auth.Phone,
-		Username:    auth.Username,
-		Nationality: auth.Country,
-		Bio:         auth.Bio,
-		Password:    auth.Password,
+		FirstName: auth.FirstName,
+		LastName:  auth.LastName,
+		Email:     auth.Email,
+		Phone:     auth.Phone,
+		Username:  auth.Username,
+		Country:   auth.Country,
+		Bio:       auth.Bio,
+		Password:  auth.Password,
 	}
 	req1.Code = code
 
@@ -130,7 +131,7 @@ func (h *authHandler) AcceptCodeToRegister(c *gin.Context) {
 		Email:     register.Email,
 		Phone:     register.Phone,
 		Username:  register.Username,
-		Country:   register.Nationality,
+		Country:   register.Country,
 		Bio:       register.Bio,
 		Password:  register.Password,
 	})
@@ -139,6 +140,31 @@ func (h *authHandler) AcceptCodeToRegister(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to register student; " + err.Error()})
 		return
 	}
+
+	reqToken := models.LoginResponse{
+		Id:       response.Id,
+		Email:    response.Email,
+		Username: register.Username,
+		Role:     "user",
+		Country:  register.Country,
+	}
+
+	accessToken, err := token.GenerateAccessToken(reqToken)
+	if err != nil {
+		h.log.Error("Failed to generate access token", "error", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate access token; " + err.Error()})
+		return
+	}
+
+	refreshToken, err := token.GenerateRefreshToken(reqToken)
+	if err != nil {
+		h.log.Error("Failed to generate refresh token", "error", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate refresh token; " + err.Error()})
+		return
+	}
+
+	response.AccessToken = accessToken
+	response.RefreshToken = refreshToken
 
 	c.JSON(http.StatusOK, response)
 }

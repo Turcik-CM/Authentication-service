@@ -11,26 +11,23 @@ type RegisterRequest struct {
 	Bio       string `json:"bio" db:"bio"`
 }
 type RegisterRequest1 struct {
-	FirstName   string `json:"first_name" db:"first_name"`
-	LastName    string `json:"last_name" db:"last_name"`
-	Email       string `json:"email" db:"email"`
-	Password    string `json:"password" db:"password"`
-	Phone       string `json:"phone" db:"phone"`
-	Username    string `json:"username" db:"username"`
-	Nationality string `json:"nationality" db:"nationality"`
-	Bio         string `json:"bio" db:"bio"`
-	Code        string `json:"code" binding:"required"`
+	FirstName string `json:"first_name" db:"first_name"`
+	LastName  string `json:"last_name" db:"last_name"`
+	Email     string `json:"email" db:"email"`
+	Password  string `json:"password" db:"password"`
+	Phone     string `json:"phone" db:"phone"`
+	Username  string `json:"username" db:"username"`
+	Country   string `json:"country" db:"country"`
+	Bio       string `json:"bio" db:"bio"`
+	Code      string `json:"code" binding:"required"`
 }
 
 type RegisterResponse struct {
-	Id          string `json:"id" db:"id"`
-	FirstName   string `json:"first_name" db:"first_name"`
-	LastName    string `json:"last_name" db:"last_name"`
-	Email       string `json:"email" db:"email"`
-	Phone       string `json:"phone" db:"phone"`
-	Username    string `json:"username" db:"username"`
-	Nationality string `json:"nationality" db:"nationality"`
-	Bio         string `json:"bio" db:"bio"`
+	Id           string `json:"id" db:"id"`
+	Email        string `json:"email" db:"email"`
+	Flag         string `json:"flag" db:"flag"`
+	AccessToken  string `json:"access_token" db:"access_token"`
+	RefreshToken string `json:"refresh_token" db:"refresh_token"`
 }
 
 type LoginEmailRequest struct {

@@ -385,6 +385,9 @@ const docTemplate = `{
                 "bio": {
                     "type": "string"
                 },
+                "country": {
+                    "type": "string"
+                },
                 "email": {
                     "type": "string"
                 },
@@ -392,9 +395,6 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "last_name": {
-                    "type": "string"
-                },
-                "nationality": {
                     "type": "string"
                 },
                 "password": {
@@ -411,28 +411,19 @@ const docTemplate = `{
         "models.RegisterResponse": {
             "type": "object",
             "properties": {
-                "bio": {
+                "access_token": {
                     "type": "string"
                 },
                 "email": {
                     "type": "string"
                 },
-                "first_name": {
+                "flag": {
                     "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
-                "last_name": {
-                    "type": "string"
-                },
-                "nationality": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "username": {
+                "refresh_token": {
                     "type": "string"
                 }
             }

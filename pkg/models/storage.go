@@ -44,6 +44,7 @@ type LoginResponse struct {
 	Username string `json:"username" db:"username"`
 	Password string `json:"password" db:"password"`
 	Role     string `json:"role" db:"role"`
+	Country  string `json:"country" db:"country"`
 }
 
 type LoginUsernameRequest struct {

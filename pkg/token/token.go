@@ -9,21 +9,21 @@ import (
 )
 
 type Claims struct {
-	ID          string `json:"user_id"`
-	Role        string `json:"role"`
-	Email       string `json:"email"`
-	Username    string `json:"username"`
-	Nationality string `json:"nationality"`
+	ID       string `json:"user_id"`
+	Role     string `json:"role"`
+	Email    string `json:"email"`
+	Username string `json:"username"`
+	Country  string `json:"nationality"`
 	jwt.StandardClaims
 }
 
 func GenerateAccessToken(in models.LoginResponse) (string, error) {
 	claims := Claims{
-		ID:          in.Id,
-		Role:        in.Role,
-		Email:       in.Email,
-		Username:    in.Username,
-		Nationality: in.Nationality,
+		ID:       in.Id,
+		Role:     in.Role,
+		Email:    in.Email,
+		Username: in.Username,
+		Country:  in.Country,
 		StandardClaims: jwt.StandardClaims{
 			IssuedAt:  time.Now().Unix(),
 			ExpiresAt: time.Now().Add(time.Hour * 10).Unix(),
@@ -41,11 +41,11 @@ func GenerateAccessToken(in models.LoginResponse) (string, error) {
 
 func GenerateRefreshToken(in models.LoginResponse) (string, error) {
 	claims := Claims{
-		ID:          in.Id,
-		Role:        in.Role,
-		Email:       in.Email,
-		Username:    in.Username,
-		Nationality: in.Nationality,
+		ID:       in.Id,
+		Role:     in.Role,
+		Email:    in.Email,
+		Username: in.Username,
+		Country:  in.Country,
 		StandardClaims: jwt.StandardClaims{
 			IssuedAt:  time.Now().Unix(),
 			ExpiresAt: time.Now().Add(time.Hour * 12).Unix(),

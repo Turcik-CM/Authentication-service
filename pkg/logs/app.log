@@ -230,7 +230,16 @@
 {"time":"2024-09-20T16:06:05.066151888+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
 {"time":"2024-09-24T18:59:01.509404219+05:00","level":"INFO","msg":"Starting server on port :50050"}
 {"time":"2024-09-25T18:51:46.773200639+05:00","level":"INFO","msg":"Starting server on port :50050"}
-{"time":"2024-09-25T19:02:11.996512299+05:00","level":"INFO","msg":"Starting server on port :50050"}
-{"time":"2024-09-25T19:17:37.736943899+05:00","level":"ERROR","msg":"failed to fetch users","error":"pq: password authentication failed for user \"postgres\""}
-{"time":"2024-09-25T19:19:10.969170286+05:00","level":"INFO","msg":"Starting server on port :50050"}
-{"time":"2024-09-25T19:19:57.072903991+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T19:00:14.131737108+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T19:02:44.323486466+05:00","level":"INFO","msg":"Successfully saved to redis"}
+{"time":"2024-09-25T19:02:54.013661092+05:00","level":"INFO","msg":"Successfully saved to redis"}
+{"time":"2024-09-25T19:03:35.695107227+05:00","level":"ERROR","msg":"Failed to register user","error":"pq: column \"country\" of relation \"users\" does not exist"}
+{"time":"2024-09-25T19:03:35.695166799+05:00","level":"ERROR","msg":"Failed to register student","error":"pq: column \"country\" of relation \"users\" does not exist"}
+{"time":"2024-09-25T19:04:37.731764207+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T19:05:01.729044873+05:00","level":"INFO","msg":"RegisterStudent handler called."}
+{"time":"2024-09-25T19:05:03.231245755+05:00","level":"INFO","msg":"Successfully registered user"}
+{"time":"2024-09-25T19:08:22.826402223+05:00","level":"INFO","msg":"ForgotPassword is working"}
+{"time":"2024-09-25T19:08:22.826470722+05:00","level":"INFO","msg":"Getting user user by email"}
+{"time":"2024-09-25T19:08:24.690703771+05:00","level":"INFO","msg":"ForgotPassword succeeded"}
+{"time":"2024-09-25T19:08:58.752162514+05:00","level":"INFO","msg":"ResetPassword is working"}
+{"time":"2024-09-25T19:08:58.752414038+05:00","level":"INFO","msg":"Getting user user by email"}

@@ -230,3 +230,7 @@
 {"time":"2024-09-20T16:06:05.066151888+05:00","level":"ERROR","msg":"Error occurred while login","!BADKEY":"sql: no rows in result set"}
 {"time":"2024-09-24T18:59:01.509404219+05:00","level":"INFO","msg":"Starting server on port :50050"}
 {"time":"2024-09-25T18:51:46.773200639+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T19:02:11.996512299+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T19:17:37.736943899+05:00","level":"ERROR","msg":"failed to fetch users","error":"pq: password authentication failed for user \"postgres\""}
+{"time":"2024-09-25T19:19:10.969170286+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-25T19:19:57.072903991+05:00","level":"INFO","msg":"Starting server on port :50050"}

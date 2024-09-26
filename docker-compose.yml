@@ -4,10 +4,10 @@ services:
   migrate:
     image: "migrate/migrate"
     networks:
-      - success-net
+      - turkish-net
     volumes:
       - ./migrations:/migrations
-    command: ["-path", "/migrations", "-database", "postgres://postgres:123321@postgres:5432/twitter_auth?sslmode=disable", "up"]
+    command: ["-path", "/migrations", "-database", "postgres://postgres:123321@postgres:5432/turk_auth?sslmode=disable", "up"]
     depends_on:
       postgres:
         condition: service_healthy
@@ -18,10 +18,10 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=123321
-      - POSTGRES_DB=twitter_auth
+      - POSTGRES_DB=turk_auth
 
     networks:
-      - success-net
+      - turkish-net
     ports:
       - 5435:5432
     volumes:
@@ -33,13 +33,13 @@ services:
       retries: 5
 
   auth:
-    container_name: tweet-auth
+    container_name: turk-auth
     build: .
     depends_on:
       postgres:
         condition: service_healthy
     networks:
-      - success-net
+      - turkish-net
     ports:
       - "8081:8081"
       - "50050:50050"
@@ -50,12 +50,12 @@ services:
     ports:
       - "6378:6379"
     networks:
-      - success-net
+      - turkish-net
 
 
 networks:
-  success-net:
-    name: success-net
+  turkish-net:
+    name: turkish-net
     driver: bridge
 
 volumes:

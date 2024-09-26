@@ -5,6 +5,7 @@ import (
 	"auth-service/pkg/hashing"
 	"auth-service/storage"
 	"context"
+	"log"
 	"log/slog"
 )
 
@@ -109,6 +110,7 @@ func (us *UserService) FetchUsers(ctx context.Context, in *pb.Filter) (*pb.UserR
 		us.log.Error("failed to fetch users", "error", err)
 		return nil, err
 	}
+	log.Println("hello")
 	return res, nil
 }
 

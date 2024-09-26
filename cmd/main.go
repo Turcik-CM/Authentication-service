@@ -28,6 +28,7 @@ func main() {
 	userSt := postgres.NewUserRepo(db)
 	userSr := service.NewUserService(userSt, logger)
 	listen, err := net.Listen("tcp", cofg.USER_PORT)
+	//test
 	if err != nil {
 		logger.Error("Error listening on port "+cofg.USER_PORT, "error", err)
 		log.Fatal(err)

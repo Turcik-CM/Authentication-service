@@ -32,7 +32,7 @@ func NewRouter(authHandler handler.AuthHandler) Router {
 // @version 1.0
 // @description server for siginIn or signUp
 // @BasePath /auth
-// @schemes http
+// @schemes https
 func (r *router) InitRouter() {
 
 	r.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

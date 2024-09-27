@@ -2,6 +2,7 @@ package api
 
 import (
 	"auth-service/api/handler"
+	"auth-service/api/middleware"
 	"auth-service/pkg/config"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -36,6 +37,7 @@ func (r *router) InitRouter() {
 
 	r.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	r.router.Use(middleware.CORSMiddleware())
 	auth := r.router.Group("/auth")
 	{
 		auth.POST("/register", r.handlers.Register)

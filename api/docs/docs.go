@@ -326,10 +326,12 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "12369"
                 },
                 "email": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "code cogan email ni kiriting"
                 }
             }
         },
@@ -353,10 +355,12 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "email": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "registerdagi email ni kiritng"
                 },
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "123456"
                 }
             }
         },
@@ -364,10 +368,12 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "123456"
                 },
                 "username": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "tom0011"
                 }
             }
         },
@@ -383,28 +389,36 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "bio": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "holasela berish shartmas"
                 },
                 "country": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Uzbekistan"
                 },
                 "email": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "your email"
                 },
                 "first_name": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Tom"
                 },
                 "last_name": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Joe"
                 },
                 "password": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "123456"
                 },
                 "phone": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "+123456789123456"
                 },
                 "username": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "tom0011"
                 }
             }
         },
@@ -438,7 +452,8 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "new_password": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "123369"
                 }
             }
         },

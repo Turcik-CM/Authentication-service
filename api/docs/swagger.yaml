@@ -3,8 +3,10 @@ definitions:
   models.AcceptCode:
     properties:
       code:
+        default: "12369"
         type: string
       email:
+        default: code cogan email ni kiriting
         type: string
     type: object
   models.Error:
@@ -20,15 +22,19 @@ definitions:
   models.LoginEmailRequest:
     properties:
       email:
+        default: registerdagi email ni kiritng
         type: string
       password:
+        default: "123456"
         type: string
     type: object
   models.LoginUsernameRequest:
     properties:
       password:
+        default: "123456"
         type: string
       username:
+        default: tom0011
         type: string
     type: object
   models.Message:
@@ -39,20 +45,28 @@ definitions:
   models.RegisterRequest:
     properties:
       bio:
+        default: holasela berish shartmas
         type: string
       country:
+        default: Uzbekistan
         type: string
       email:
+        default: your email
         type: string
       first_name:
+        default: Tom
         type: string
       last_name:
+        default: Joe
         type: string
       password:
+        default: "123456"
         type: string
       phone:
+        default: "+123456789123456"
         type: string
       username:
+        default: tom0011
         type: string
     type: object
   models.RegisterResponse:
@@ -75,6 +89,7 @@ definitions:
       email:
         type: string
       new_password:
+        default: "123369"
         type: string
     type: object
   models.Tokens:

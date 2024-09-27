@@ -305,5 +305,5 @@ paths:
       tags:
       - Auth
 schemes:
-- http
+- https
 swagger: "2.0"

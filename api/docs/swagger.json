@@ -1,4 +1,7 @@
 {
+    "schemes": [
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
         "description": "server for siginIn or signUp",
@@ -362,11 +365,11 @@
             "properties": {
                 "password": {
                     "type": "string",
-                    "default": "123321"
+                    "default": "123456"
                 },
                 "username": {
                     "type": "string",
-                    "default": "admin"
+                    "default": "tom0011"
                 }
             }
         },

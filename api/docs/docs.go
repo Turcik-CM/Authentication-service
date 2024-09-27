@@ -369,11 +369,11 @@ const docTemplate = `{
             "properties": {
                 "password": {
                     "type": "string",
-                    "default": "123321"
+                    "default": "123456"
                 },
                 "username": {
                     "type": "string",
-                    "default": "admin"
+                    "default": "tom0011"
                 }
             }
         },
@@ -476,7 +476,7 @@ var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "",
 	BasePath:         "/auth",
-	Schemes:          []string{},
+	Schemes:          []string{"http"},
 	Title:            "Authenfication service",
 	Description:      "server for siginIn or signUp",
 	InfoInstanceName: "swagger",

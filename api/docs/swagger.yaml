@@ -31,10 +31,10 @@ definitions:
   models.LoginUsernameRequest:
     properties:
       password:
-        default: "123321"
+        default: "123456"
         type: string
       username:
-        default: admin
+        default: tom0011
         type: string
     type: object
   models.Message:
@@ -304,4 +304,6 @@ paths:
       summary: Reset Password
       tags:
       - Auth
+schemes:
+- http
 swagger: "2.0"

@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users
 (
     id             UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     email          VARCHAR UNIQUE,
-    phone          VARCHAR(13) UNIQUE,
+    phone          VARCHAR(16) UNIQUE,
     first_name     VARCHAR NOT NULL ,
     last_name      VARCHAR NOT NULL ,
     username       VARCHAR,

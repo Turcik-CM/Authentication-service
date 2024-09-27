@@ -461,7 +461,7 @@ var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "",
 	BasePath:         "/auth",
-	Schemes:          []string{"http"},
+	Schemes:          []string{"https"},
 	Title:            "Authenfication service",
 	Description:      "server for siginIn or signUp",
 	InfoInstanceName: "swagger",

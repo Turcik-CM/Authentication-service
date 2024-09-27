@@ -304,6 +304,4 @@ paths:
       summary: Reset Password
       tags:
       - Auth
-schemes:
-- https
 swagger: "2.0"

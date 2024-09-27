@@ -244,3 +244,8 @@
 {"time":"2024-09-25T19:08:58.752162514+05:00","level":"INFO","msg":"ResetPassword is working"}
 {"time":"2024-09-25T19:08:58.752414038+05:00","level":"INFO","msg":"Getting user user by email"}
 {"time":"2024-09-27T18:45:30.154334832+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-27T19:06:49.187359499+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-27T19:07:41.415826707+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-27T19:07:46.332158501+05:00","level":"INFO","msg":"RegisterStudent handler called."}
+{"time":"2024-09-27T19:07:48.113809286+05:00","level":"ERROR","msg":"Failed to register admin","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-27T19:07:48.113843492+05:00","level":"ERROR","msg":"Error registering ADMIN","!BADKEY":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}

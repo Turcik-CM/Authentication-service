@@ -1,14 +1,14 @@
 package models
 
 type RegisterRequest struct {
-	Email     string `json:"email" db:"email"`
-	Phone     string `json:"phone" db:"phone"`
-	FirstName string `json:"first_name" db:"first_name"`
-	LastName  string `json:"last_name" db:"last_name"`
-	Username  string `json:"username" db:"username"`
-	Country   string `json:"country" db:"country"`
-	Password  string `json:"password" db:"password"`
-	Bio       string `json:"bio" db:"bio"`
+	Email     string `json:"email" db:"email" default:"your email"`
+	Phone     string `json:"phone" db:"phone" default:"+123456789123456"`
+	FirstName string `json:"first_name" db:"first_name" default:"Tom"`
+	LastName  string `json:"last_name" db:"last_name" default:"Joe"`
+	Username  string `json:"username" db:"username" default:"tom0011"`
+	Country   string `json:"country" db:"country" default:"Uzbekistan"`
+	Password  string `json:"password" db:"password" default:"123456"`
+	Bio       string `json:"bio" db:"bio" default:"holasela berish shartmas"`
 }
 type RegisterRequest1 struct {
 	FirstName string `json:"first_name" db:"first_name"`
@@ -31,8 +31,8 @@ type RegisterResponse struct {
 }
 
 type LoginEmailRequest struct {
-	Email    string `json:"email" db:"email"`
-	Password string `json:"password" db:"password"`
+	Email    string `json:"email" db:"email" default:"registerdagi email ni kiritng"`
+	Password string `json:"password" db:"password" default:"123456"`
 }
 
 type LoginResponse struct {
@@ -45,8 +45,8 @@ type LoginResponse struct {
 }
 
 type LoginUsernameRequest struct {
-	Username string `json:"username" db:"username"`
-	Password string `json:"password" db:"password"`
+	Username string `json:"username" db:"username" default:"tom0011"`
+	Password string `json:"password" db:"password" default:"123456"`
 }
 
 type Tokens struct {
@@ -58,8 +58,8 @@ type Error struct {
 	Error string `json:"error" db:"error"`
 }
 type AcceptCode struct {
-	Email string `json:"email"`
-	Code  string `json:"code"`
+	Email string `json:"email" default:"code cogan email ni kiriting"`
+	Code  string `json:"code" default:"12369"`
 }
 type ForgotPasswordRequest struct {
 	Email string `json:"email"`
@@ -73,7 +73,7 @@ type Message struct {
 }
 type ResetPassReq struct {
 	Email    string `json:"email"`
-	Password string `json:"new_password"`
+	Password string `json:"new_password" default:"123369"`
 	Code     string `json:"code"`
 }
 type UpdatePasswordReq struct {

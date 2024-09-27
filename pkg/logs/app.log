@@ -243,3 +243,4 @@
 {"time":"2024-09-25T19:08:24.690703771+05:00","level":"INFO","msg":"ForgotPassword succeeded"}
 {"time":"2024-09-25T19:08:58.752162514+05:00","level":"INFO","msg":"ResetPassword is working"}
 {"time":"2024-09-25T19:08:58.752414038+05:00","level":"INFO","msg":"Getting user user by email"}
+{"time":"2024-09-27T18:45:30.154334832+05:00","level":"INFO","msg":"Starting server on port :50050"}

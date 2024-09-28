@@ -250,3 +250,6 @@
 {"time":"2024-09-27T19:07:48.113809286+05:00","level":"ERROR","msg":"Failed to register admin","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
 {"time":"2024-09-27T19:07:48.113843492+05:00","level":"ERROR","msg":"Error registering ADMIN","!BADKEY":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
 {"time":"2024-09-27T21:57:04.643342075+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-28T17:11:57.55024703+05:00","level":"INFO","msg":"Starting server on port :50050"}
+{"time":"2024-09-28T17:12:07.120581353+05:00","level":"ERROR","msg":"Error in GetRegister","err":"dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-09-28T17:12:07.120688499+05:00","level":"ERROR","msg":"Failed to get register from redis","error":"dial tcp: lookup redis on 127.0.0.53:53: server misbehaving"}

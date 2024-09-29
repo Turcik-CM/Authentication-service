@@ -369,11 +369,11 @@ const docTemplate = `{
             "properties": {
                 "password": {
                     "type": "string",
-                    "default": "123456"
+                    "default": "123321"
                 },
                 "username": {
                     "type": "string",
-                    "default": "tom0011"
+                    "default": "admin"
                 }
             }
         },

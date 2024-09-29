@@ -8,19 +8,29 @@ import (
 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		// Allow requests from a specific origin (e.g., https://example.com)
-		// or use "*" for all origins (which isn't secure for credentials)
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "https://your-allowed-domain.com")
+		allowedOrigins := []string{"https://turk.gophers.com", "https://turk.gophers.com"}
+		origin := c.Request.Header.Get("Origin")
 
-		// Security headers for HTTPS
-		c.Writer.Header().Set("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
+		// Проверяем, разрешен ли домен
+		for _, o := range allowedOrigins {
+			if origin == o {
+				c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
+				break
+			}
+		}
 
-		c.Writer.Header().Set("Content-Type", "application/json")
-		c.Writer.Header().Set("Access-Control-Max-Age", "86400")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, UPDATE")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, X-Max")
+		// Остальные CORS заголовки
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
 
+		// Обработка OPTIONS запросов (preflight)
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(http.StatusOK)
+			return
+		}
+
+		// Передаем управление дальше
 		c.Next()
 	}
 }

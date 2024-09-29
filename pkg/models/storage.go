@@ -45,8 +45,8 @@ type LoginResponse struct {
 }
 
 type LoginUsernameRequest struct {
-	Username string `json:"username" db:"username" default:"tom0011"`
-	Password string `json:"password" db:"password" default:"123456"`
+	Username string `json:"username" db:"username" default:"admin"`
+	Password string `json:"password" db:"password" default:"123321"`
 }
 
 type Tokens struct {

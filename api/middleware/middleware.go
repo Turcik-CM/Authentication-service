@@ -3,35 +3,25 @@ package middleware
 import (
 	"auth-service/pkg/token"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 )
 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		allowedOrigins := []string{"https://turk.gophers.com", "https://turk.gophers.com"}
-		origin := c.Request.Header.Get("Origin")
-
-		// Проверяем, разрешен ли домен
-		for _, o := range allowedOrigins {
-			if origin == o {
-				c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
-				break
-			}
-		}
-
-		// Остальные CORS заголовки
+		log.Println("Cors middleware triggered")
+		c.Writer.Header().Set("Content-Type", "application/json")
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Max-Age", "86400")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, UPDATE")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, X-Max")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
 
-		// Обработка OPTIONS запросов (preflight)
 		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(http.StatusOK)
-			return
+			c.AbortWithStatus(200)
+		} else {
+			c.Next()
 		}
-
-		// Передаем управление дальше
-		c.Next()
 	}
 }
 

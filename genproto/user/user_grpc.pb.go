@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.4.0
 // - protoc             v4.25.1
-// source: user/user.proto
+// source: Protocol-buffers/user/user.proto
 
 package user
 
@@ -68,8 +68,8 @@ type UserServiceClient interface {
 	MostPopularUser(ctx context.Context, in *Void, opts ...grpc.CallOption) (*UserResponse, error)
 	// auth
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
-	LoginEmail(ctx context.Context, in *LoginEmailRequest, opts ...grpc.CallOption) (*LoginResponse1, error)
-	LoginUsername(ctx context.Context, in *LoginUsernameRequest, opts ...grpc.CallOption) (*LoginResponse1, error)
+	LoginEmail(ctx context.Context, in *LoginEmailRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	LoginUsername(ctx context.Context, in *LoginUsernameRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	AcceptCodeToRegister(ctx context.Context, in *AcceptCode, opts ...grpc.CallOption) (*RegisterResponse, error)
 	ForgotPassword(ctx context.Context, in *ForgotPasswordRequest, opts ...grpc.CallOption) (*Message, error)
 	RegisterAdmin(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Message, error)
@@ -236,9 +236,9 @@ func (c *userServiceClient) Register(ctx context.Context, in *RegisterRequest, o
 	return out, nil
 }
 
-func (c *userServiceClient) LoginEmail(ctx context.Context, in *LoginEmailRequest, opts ...grpc.CallOption) (*LoginResponse1, error) {
+func (c *userServiceClient) LoginEmail(ctx context.Context, in *LoginEmailRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginResponse1)
+	out := new(LoginResponse)
 	err := c.cc.Invoke(ctx, UserService_LoginEmail_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -246,9 +246,9 @@ func (c *userServiceClient) LoginEmail(ctx context.Context, in *LoginEmailReques
 	return out, nil
 }
 
-func (c *userServiceClient) LoginUsername(ctx context.Context, in *LoginUsernameRequest, opts ...grpc.CallOption) (*LoginResponse1, error) {
+func (c *userServiceClient) LoginUsername(ctx context.Context, in *LoginUsernameRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginResponse1)
+	out := new(LoginResponse)
 	err := c.cc.Invoke(ctx, UserService_LoginUsername_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -340,8 +340,8 @@ type UserServiceServer interface {
 	MostPopularUser(context.Context, *Void) (*UserResponse, error)
 	// auth
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
-	LoginEmail(context.Context, *LoginEmailRequest) (*LoginResponse1, error)
-	LoginUsername(context.Context, *LoginUsernameRequest) (*LoginResponse1, error)
+	LoginEmail(context.Context, *LoginEmailRequest) (*LoginResponse, error)
+	LoginUsername(context.Context, *LoginUsernameRequest) (*LoginResponse, error)
 	AcceptCodeToRegister(context.Context, *AcceptCode) (*RegisterResponse, error)
 	ForgotPassword(context.Context, *ForgotPasswordRequest) (*Message, error)
 	RegisterAdmin(context.Context, *Message) (*Message, error)
@@ -400,10 +400,10 @@ func (UnimplementedUserServiceServer) MostPopularUser(context.Context, *Void) (*
 func (UnimplementedUserServiceServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
-func (UnimplementedUserServiceServer) LoginEmail(context.Context, *LoginEmailRequest) (*LoginResponse1, error) {
+func (UnimplementedUserServiceServer) LoginEmail(context.Context, *LoginEmailRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginEmail not implemented")
 }
-func (UnimplementedUserServiceServer) LoginUsername(context.Context, *LoginUsernameRequest) (*LoginResponse1, error) {
+func (UnimplementedUserServiceServer) LoginUsername(context.Context, *LoginUsernameRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginUsername not implemented")
 }
 func (UnimplementedUserServiceServer) AcceptCodeToRegister(context.Context, *AcceptCode) (*RegisterResponse, error) {
@@ -952,5 +952,5 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "user/user.proto",
+	Metadata: "Protocol-buffers/user/user.proto",
 }

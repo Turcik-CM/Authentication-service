@@ -6,8 +6,8 @@ import (
 
 type AuthStorage interface {
 	Register(in *pb.RegisterRequest) (*pb.RegisterResponse, error)
-	LoginEmail(in *pb.LoginEmailRequest) (*pb.LoginResponse1, error)
-	LoginUsername(in *pb.LoginUsernameRequest) (*pb.LoginResponse1, error)
+	LoginEmail(in *pb.LoginEmailRequest) (*pb.LoginResponse, error)
+	LoginUsername(in *pb.LoginUsernameRequest) (*pb.LoginResponse, error)
 	GetUserByEmail(in *pb.Email) (*pb.GetProfileResponse, error)
 	RegisterAdmin(in *pb.Message) (*pb.Message, error)
 	UpdatePassword(in *pb.UpdatePasswordReq) (*pb.Message, error)

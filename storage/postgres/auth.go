@@ -2,6 +2,8 @@ package postgres
 
 import (
 	pb "auth-service/genproto/user"
+	"auth-service/pkg/hashing"
+	"auth-service/pkg/token"
 	"auth-service/storage"
 	"context"
 	"database/sql"
@@ -59,26 +61,84 @@ func (a *AuthRepo) GetUserByEmail(in *pb.Email) (*pb.GetProfileResponse, error) 
 	return &user, nil
 }
 
-func (a *AuthRepo) LoginEmail(in *pb.LoginEmailRequest) (*pb.LoginResponse1, error) {
+func (a *AuthRepo) LoginEmail(in *pb.LoginEmailRequest) (*pb.LoginResponse, error) {
 	res := pb.LoginResponse1{}
 	query := `SELECT id, email, password, role, username FROM users WHERE email = $1 AND deleted_at = 0`
 	err := a.db.Get(&res, query, in.Email)
 	if err != nil {
-		return &pb.LoginResponse1{}, err
+		return &pb.LoginResponse{}, err
 	}
 
-	return &res, nil
+	check := hashing.CheckPasswordHash(res.Password, in.Password)
+	if !check {
+		return &pb.LoginResponse{}, errors.New("invalid password")
+	}
+
+	reqToken := pb.LoginResponse1{
+		Id:       res.Id,
+		Email:    res.Email,
+		UserName: res.UserName,
+		Role:     res.Role,
+		Country:  res.Country,
+	}
+
+	accessToken, err := token.GenerateAccessToken(&reqToken)
+	if err != nil {
+		return nil, err
+	}
+
+	refreshToken, err := token.GenerateRefreshToken(&reqToken)
+	if err != nil {
+		return nil, err
+	}
+
+	www := pb.LoginResponse{
+		AccessToken:  accessToken,
+		RefreshToken: refreshToken,
+		UserId:       res.Id,
+	}
+
+	return &www, nil
 }
 
-func (a *AuthRepo) LoginUsername(in *pb.LoginUsernameRequest) (*pb.LoginResponse1, error) {
+func (a *AuthRepo) LoginUsername(in *pb.LoginUsernameRequest) (*pb.LoginResponse, error) {
 	res := pb.LoginResponse1{}
 	query := `SELECT id, email, password, role, username FROM users WHERE username = $1 AND deleted_at = 0`
 	err := a.db.Get(&res, query, in.Username)
 	if err != nil {
-		return &pb.LoginResponse1{}, err
+		return &pb.LoginResponse{}, err
 	}
 
-	return &res, nil
+	check := hashing.CheckPasswordHash(res.Password, in.Password)
+	if !check {
+		return &pb.LoginResponse{}, errors.New("invalid password")
+	}
+
+	reqToken := pb.LoginResponse1{
+		Id:       res.Id,
+		Email:    res.Email,
+		UserName: res.UserName,
+		Role:     res.Role,
+		Country:  res.Country,
+	}
+
+	accessToken, err := token.GenerateAccessToken(&reqToken)
+	if err != nil {
+		return nil, err
+	}
+
+	refreshToken, err := token.GenerateRefreshToken(&reqToken)
+	if err != nil {
+		return nil, err
+	}
+
+	www := pb.LoginResponse{
+		AccessToken:  accessToken,
+		RefreshToken: refreshToken,
+		UserId:       res.Id,
+	}
+
+	return &www, nil
 }
 
 func (a *AuthRepo) RegisterAdmin(in *pb.Message) (*pb.Message, error) {

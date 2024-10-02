@@ -1,7 +1,7 @@
 package postgres
 
 import (
-	"auth-service/pkg/models"
+	pb "auth-service/genproto/user"
 	"auth-service/storage"
 	"context"
 	"database/sql"
@@ -20,8 +20,7 @@ func NewAuthRepo(db *sqlx.DB) storage.AuthStorage {
 	}
 }
 
-// Register a new user with data merged into the 'users' table
-func (a *AuthRepo) Register(in models.RegisterRequest) (models.RegisterResponse, error) {
+func (a *AuthRepo) Register(in *pb.RegisterRequest) (*pb.RegisterResponse, error) {
 	var id string
 	var flag string
 	query := `INSERT INTO users (phone, email, password, first_name, last_name, username, country, bio) 
@@ -29,27 +28,26 @@ func (a *AuthRepo) Register(in models.RegisterRequest) (models.RegisterResponse,
 			  RETURNING id`
 	err := a.db.QueryRow(query, in.Phone, in.Email, in.Password, in.FirstName, in.LastName, in.Username, in.Country, in.Bio).Scan(&id)
 	if err != nil {
-		return models.RegisterResponse{}, err
+		return &pb.RegisterResponse{}, err
 	}
 
 	err = a.db.Get(&flag, "SELECT flag FROM countries WHERE country = $1", in.Country)
 	if err != nil {
-		return models.RegisterResponse{}, err
+		return &pb.RegisterResponse{}, err
 	}
 
-	return models.RegisterResponse{
+	return &pb.RegisterResponse{
 		Id:    id,
 		Email: in.Email,
 		Flag:  flag,
 	}, nil
 }
 
-// GetUserByEmail retrieves user data by email
-func (a *AuthRepo) GetUserByEmail(ctx context.Context, email string) (*models.GetProfileResponse, error) {
+func (a *AuthRepo) GetUserByEmail(in *pb.Email) (*pb.GetProfileResponse, error) {
 	query := `SELECT id, created_at FROM users WHERE email = $1 AND deleted_at=0`
 
-	var user models.GetProfileResponse
-	err := a.db.QueryRowContext(ctx, query, email).Scan(&user.Id, &user.CreatedAt)
+	var user pb.GetProfileResponse
+	err := a.db.QueryRowContext(context.Background(), query, in.Email).Scan(&user.UserId, &user.CreatedAt)
 
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -61,59 +59,55 @@ func (a *AuthRepo) GetUserByEmail(ctx context.Context, email string) (*models.Ge
 	return &user, nil
 }
 
-// Login using email and get user info
-func (a *AuthRepo) LoginEmail(in models.LoginEmailRequest) (models.LoginResponse, error) {
-	res := models.LoginResponse{}
+func (a *AuthRepo) LoginEmail(in *pb.LoginEmailRequest) (*pb.LoginResponse1, error) {
+	res := pb.LoginResponse1{}
 	query := `SELECT id, email, password, role, username FROM users WHERE email = $1 AND deleted_at = 0`
 	err := a.db.Get(&res, query, in.Email)
 	if err != nil {
-		return models.LoginResponse{}, err
+		return &pb.LoginResponse1{}, err
 	}
 
-	return res, nil
+	return &res, nil
 }
 
-// Login using username and get user info
-func (a *AuthRepo) LoginUsername(in models.LoginUsernameRequest) (models.LoginResponse, error) {
-	res := models.LoginResponse{}
+func (a *AuthRepo) LoginUsername(in *pb.LoginUsernameRequest) (*pb.LoginResponse1, error) {
+	res := pb.LoginResponse1{}
 	query := `SELECT id, email, password, role, username FROM users WHERE username = $1 AND deleted_at = 0`
 	err := a.db.Get(&res, query, in.Username)
 	if err != nil {
-		return models.LoginResponse{}, err
+		return &pb.LoginResponse1{}, err
 	}
 
-	return res, nil
+	return &res, nil
 }
 
-// RegisterAdmin creates a new admin user
-func (a *AuthRepo) RegisterAdmin(ctx context.Context, pass string) error {
+func (a *AuthRepo) RegisterAdmin(in *pb.Message) (*pb.Message, error) {
 	query := `INSERT INTO users (email, password, role,first_name,last_name,username) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`
 	var id string
-	err := a.db.QueryRow(query, "admiN", pass, "c-admin", "adminchikov", "admin", "admin").Scan(&id)
+	err := a.db.QueryRow(query, "admiN", in.Message, "c-admin", "adminchikov", "admin", "admin").Scan(&id)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return nil, nil
 }
 
-// UpdatePassword allows the user to change their password
-func (a *AuthRepo) UpdatePassword(ctx context.Context, req *models.UpdatePasswordReq) error {
+func (a *AuthRepo) UpdatePassword(in *pb.UpdatePasswordReq) (*pb.Message, error) {
 	query := `UPDATE users SET password = $1 WHERE id = $2 AND deleted_at = 0`
 
-	result, err := a.db.ExecContext(ctx, query, req.Password, req.Id)
+	result, err := a.db.ExecContext(context.Background(), query, in.Password, in.Id)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	rowsAffected, err := result.RowsAffected()
 	if err != nil {
-		return fmt.Errorf("failed to check rows affected: %w", err)
+		return nil, fmt.Errorf("failed to check rows affected: %w", err)
 	}
 
 	if rowsAffected == 0 {
-		return fmt.Errorf("user not found")
+		return nil, fmt.Errorf("user not found")
 	}
 
-	return nil
+	return nil, nil
 }

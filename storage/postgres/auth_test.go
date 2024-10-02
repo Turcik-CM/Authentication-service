@@ -1,7 +1,7 @@
 package postgres
 
 import (
-	"auth-service/pkg/models"
+	pb "auth-service/genproto/user"
 	"fmt"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
@@ -27,21 +27,20 @@ func TestRegister(t *testing.T) {
 		t.Errorf("Failed to connect to database: %v", err)
 	}
 
-	rst := models.RegisterRequest{
-		FirstName:   "Hamidulloh3",
-		LastName:    "Hamidullayev4",
-		Email:       "hamidulloh5@gmail.com",
-		Password:    "hamidulloh6",
-		Phone:       "9997471785",
-		Username:    "hamidulloh4",
-		Nationality: "...",
-		Bio: "..................." +
-			".....................",
+	rst := pb.RegisterRequest{
+		Email:     "dodi",
+		Phone:     "dodi",
+		FirstName: "dodi",
+		LastName:  "dodi",
+		Username:  "dodi",
+		Country:   "Uzbekistan",
+		Password:  "dodi",
+		Bio:       "-----------------------------",
 	}
 
 	auth := NewAuthRepo(db)
 
-	req, err := auth.Register(rst)
+	req, err := auth.Register(&rst)
 	if err != nil {
 		t.Errorf("Failed to register user: %v", err)
 	}
@@ -56,14 +55,14 @@ func TestLoginEmail(t *testing.T) {
 		t.Errorf("Failed to connect to database: %v", err)
 	}
 
-	rst := models.LoginEmailRequest{
-		Email:    "hamidulloh@gmail.com",
-		Password: "hamidulloh",
+	rst := pb.LoginEmailRequest{
+		Email:    "dodi",
+		Password: "dodi",
 	}
 
 	auth := NewAuthRepo(db)
 
-	req, err := auth.LoginEmail(rst)
+	req, err := auth.LoginEmail(&rst)
 	if err != nil {
 		t.Errorf("Failed to register user: %v", err)
 	}
@@ -76,12 +75,61 @@ func TestLoginUsername(t *testing.T) {
 	if err != nil {
 		t.Errorf("Failed to connect to database: %v", err)
 	}
-	rst := models.LoginUsernameRequest{
-		Username: "hamidulloh",
-		Password: "hamidulloh",
+	rst := pb.LoginUsernameRequest{
+		Username: "dodi",
+		Password: "dodi",
 	}
 	auth := NewAuthRepo(db)
-	req, err := auth.LoginUsername(rst)
+	req, err := auth.LoginUsername(&rst)
+	if err != nil {
+		t.Errorf("Failed to register user: %v", err)
+	}
+	fmt.Println(req)
+}
+
+func TestGetUserByEmail(t *testing.T) {
+	db, err := Connect()
+	if err != nil {
+		t.Errorf("Failed to connect to database: %v", err)
+	}
+	res := pb.Email{
+		Email: "dodi",
+	}
+	auth := NewAuthRepo(db)
+	req, err := auth.GetUserByEmail(&res)
+	if err != nil {
+		t.Errorf("Failed to register user: %v", err)
+	}
+	fmt.Println(req)
+}
+
+func TestRegisterAdmin(t *testing.T) {
+	db, err := Connect()
+	if err != nil {
+		t.Errorf("Failed to connect to database: %v", err)
+	}
+	rst := pb.Message{
+		Message: "123321",
+	}
+	auth := NewAuthRepo(db)
+	req, err := auth.RegisterAdmin(&rst)
+	if err != nil {
+		t.Errorf("Failed to register user: %v", err)
+	}
+	fmt.Println(req)
+}
+
+func TestUpdatePassword(t *testing.T) {
+	db, err := Connect()
+	if err != nil {
+		t.Errorf("Failed to connect to database: %v", err)
+	}
+	rst := pb.UpdatePasswordReq{
+		Id:       "cdb90f0d-c69d-432a-b8a0-6fc40e283ccb",
+		Password: "12221",
+	}
+	auth := NewAuthRepo(db)
+	req, err := auth.UpdatePassword(&rst)
 	if err != nil {
 		t.Errorf("Failed to register user: %v", err)
 	}

@@ -35,6 +35,8 @@ func NewRouter(authHandler handler.AuthHandler) Router {
 // @BasePath /auth
 func (r *router) InitRouter() {
 
+	r.router.Use(middleware.CORSMiddleware())
+
 	r.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.router.Use(middleware.CORSMiddleware())

@@ -25,9 +25,10 @@ func NewUserRepo(db *sqlx.DB) storage.UserStorage {
 func (p *UserRepo) Create(req *pb.CreateRequest) (*pb.UserResponse, error) {
 	userID := uuid.New().String()
 
-	query := `INSERT INTO users (id, phone, email, password, first_name, last_name, username, country, bio) 
-	          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`
-	_, err := p.db.Exec(query, userID, req.Phone, req.Email, req.Password, req.FirstName, req.LastName, req.Username, req.Nationality, req.Bio)
+	query := `INSERT INTO users (id, phone, email, password, first_name, last_name, username, country, bio, role) 
+	          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`
+	_, err := p.db.Exec(query, userID, req.Phone, req.Email, req.Password,
+		req.FirstName, req.LastName, req.Username, req.Nationality, req.Bio, req.Role)
 	if err != nil {
 		return nil, err
 	}

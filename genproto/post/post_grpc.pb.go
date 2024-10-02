@@ -29,8 +29,6 @@ const (
 	PostService_GetPostByCountry_FullMethodName         = "/post.PostService/GetPostByCountry"
 	PostService_GetUserRecommendation_FullMethodName    = "/post.PostService/GetUserRecommendation"
 	PostService_GetPostsByUsername_FullMethodName       = "/post.PostService/GetPostsByUsername"
-	PostService_GetPostsSubscribers_FullMethodName      = "/post.PostService/GetPostsSubscribers"
-	PostService_GetTrendPosts_FullMethodName            = "/post.PostService/GetTrendPosts"
 	PostService_GetTrendsPost_FullMethodName            = "/post.PostService/GetTrendsPost"
 	PostService_SearchPost_FullMethodName               = "/post.PostService/SearchPost"
 	PostService_AddLikePost_FullMethodName              = "/post.PostService/AddLikePost"
@@ -78,8 +76,6 @@ type PostServiceClient interface {
 	// basic-additional
 	GetUserRecommendation(ctx context.Context, in *Username, opts ...grpc.CallOption) (*PostListResponse, error)
 	GetPostsByUsername(ctx context.Context, in *Username, opts ...grpc.CallOption) (*PostListResponse, error)
-	GetPostsSubscribers(ctx context.Context, in *Username, opts ...grpc.CallOption) (*PostListResponse, error)
-	GetTrendPosts(ctx context.Context, in *Void, opts ...grpc.CallOption) (*PostListResponse, error)
 	GetTrendsPost(ctx context.Context, in *Void, opts ...grpc.CallOption) (*PostListResponse, error)
 	SearchPost(ctx context.Context, in *Search, opts ...grpc.CallOption) (*PostListResponse, error)
 	// like
@@ -216,26 +212,6 @@ func (c *postServiceClient) GetPostsByUsername(ctx context.Context, in *Username
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PostListResponse)
 	err := c.cc.Invoke(ctx, PostService_GetPostsByUsername_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *postServiceClient) GetPostsSubscribers(ctx context.Context, in *Username, opts ...grpc.CallOption) (*PostListResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PostListResponse)
-	err := c.cc.Invoke(ctx, PostService_GetPostsSubscribers_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *postServiceClient) GetTrendPosts(ctx context.Context, in *Void, opts ...grpc.CallOption) (*PostListResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PostListResponse)
-	err := c.cc.Invoke(ctx, PostService_GetTrendPosts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -548,8 +524,6 @@ type PostServiceServer interface {
 	// basic-additional
 	GetUserRecommendation(context.Context, *Username) (*PostListResponse, error)
 	GetPostsByUsername(context.Context, *Username) (*PostListResponse, error)
-	GetPostsSubscribers(context.Context, *Username) (*PostListResponse, error)
-	GetTrendPosts(context.Context, *Void) (*PostListResponse, error)
 	GetTrendsPost(context.Context, *Void) (*PostListResponse, error)
 	SearchPost(context.Context, *Search) (*PostListResponse, error)
 	// like
@@ -618,12 +592,6 @@ func (UnimplementedPostServiceServer) GetUserRecommendation(context.Context, *Us
 }
 func (UnimplementedPostServiceServer) GetPostsByUsername(context.Context, *Username) (*PostListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPostsByUsername not implemented")
-}
-func (UnimplementedPostServiceServer) GetPostsSubscribers(context.Context, *Username) (*PostListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPostsSubscribers not implemented")
-}
-func (UnimplementedPostServiceServer) GetTrendPosts(context.Context, *Void) (*PostListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTrendPosts not implemented")
 }
 func (UnimplementedPostServiceServer) GetTrendsPost(context.Context, *Void) (*PostListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTrendsPost not implemented")
@@ -901,42 +869,6 @@ func _PostService_GetPostsByUsername_Handler(srv interface{}, ctx context.Contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PostServiceServer).GetPostsByUsername(ctx, req.(*Username))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PostService_GetPostsSubscribers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Username)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PostServiceServer).GetPostsSubscribers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PostService_GetPostsSubscribers_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PostServiceServer).GetPostsSubscribers(ctx, req.(*Username))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PostService_GetTrendPosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Void)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PostServiceServer).GetTrendPosts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PostService_GetTrendPosts_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PostServiceServer).GetTrendPosts(ctx, req.(*Void))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1509,14 +1441,6 @@ var PostService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPostsByUsername",
 			Handler:    _PostService_GetPostsByUsername_Handler,
-		},
-		{
-			MethodName: "GetPostsSubscribers",
-			Handler:    _PostService_GetPostsSubscribers_Handler,
-		},
-		{
-			MethodName: "GetTrendPosts",
-			Handler:    _PostService_GetTrendPosts_Handler,
 		},
 		{
 			MethodName: "GetTrendsPost",

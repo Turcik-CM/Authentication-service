@@ -39,6 +39,8 @@ func (r *router) InitRouter() {
 
 	r.router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+	r.router.Use(middleware.CORSMiddleware())
+
 	auth := r.router.Group("/auth")
 	{
 		auth.POST("/register", r.handlers.Register)

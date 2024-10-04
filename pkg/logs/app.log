@@ -257,3 +257,28 @@
 {"time":"2024-09-29T16:07:52.99430915+05:00","level":"INFO","msg":"RegisterStudent handler called."}
 {"time":"2024-09-29T16:07:55.08281406+05:00","level":"ERROR","msg":"Failed to register admin","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
 {"time":"2024-09-29T16:07:55.082852532+05:00","level":"ERROR","msg":"Error registering ADMIN","!BADKEY":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-10-04T16:14:58.210227654+05:00","level":"ERROR","msg":"failed to create user","error":"dial tcp: lookup postgres on 127.0.0.53:53: server misbehaving"}
+{"time":"2024-10-04T16:15:44.896618881+05:00","level":"ERROR","msg":"failed to create user","error":"pq: database \"turk_auth\" does not exist"}
+{"time":"2024-10-04T16:15:59.349957132+05:00","level":"ERROR","msg":"failed to create user","error":"pq: invalid input value for enum role: \"\""}
+{"time":"2024-10-04T16:16:52.722905433+05:00","level":"ERROR","msg":"failed to create user","error":"pq: invalid input value for enum role: \"\""}
+{"time":"2024-10-04T16:30:30.009775788+05:00","level":"ERROR","msg":"failed to get user","error":"pq: invalid input syntax for type uuid: \"{id}\""}
+{"time":"2024-10-04T16:32:52.433798466+05:00","level":"ERROR","msg":"failed to delete user","error":"failed to mark user as deleted: pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-10-04T16:33:57.082030209+05:00","level":"ERROR","msg":"failed to delete user","error":"failed to mark user as deleted: pq: invalid input syntax for type uuid: \"{id}\""}
+{"time":"2024-10-04T16:45:08.726603811+05:00","level":"ERROR","msg":"failed to hash password","error":"invalid password"}
+{"time":"2024-10-04T16:48:14.719295012+05:00","level":"ERROR","msg":"failed to follow","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-10-04T16:50:19.487799702+05:00","level":"ERROR","msg":"failed to follow","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-10-04T16:50:43.483232281+05:00","level":"ERROR","msg":"failed to follow","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-10-04T16:51:45.653903756+05:00","level":"ERROR","msg":"failed to follow","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-10-04T16:54:11.995412678+05:00","level":"ERROR","msg":"failed to follow","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-10-04T16:57:46.187439483+05:00","level":"ERROR","msg":"failed to unfollow","error":"pq: invalid input syntax for type uuid: \"\""}
+{"time":"2024-10-04T16:58:09.917963988+05:00","level":"ERROR","msg":"failed to unfollow","error":"pq: invalid input syntax for type uuid: \"{user_id}\""}
+{"time":"2024-10-04T16:59:57.756595322+05:00","level":"ERROR","msg":"failed to get user","error":"sql: Scan error on column index 2, name \"phone\": converting NULL to string is unsupported"}
+{"time":"2024-10-04T17:00:32.875770793+05:00","level":"ERROR","msg":"failed to get user","error":"sql: Scan error on column index 6, name \"country\": converting NULL to string is unsupported"}
+{"time":"2024-10-04T17:00:49.013420425+05:00","level":"ERROR","msg":"failed to get user","error":"sql: Scan error on column index 7, name \"bio\": converting NULL to string is unsupported"}
+{"time":"2024-10-04T17:03:22.630547327+05:00","level":"ERROR","msg":"failed to list followers","error":"expected slice but got ptr"}
+{"time":"2024-10-04T17:05:49.723081961+05:00","level":"ERROR","msg":"failed to list followers","error":"expected slice but got ptr"}
+{"time":"2024-10-04T17:06:28.829843835+05:00","level":"ERROR","msg":"failed to list following","error":"expected slice but got ptr"}
+{"time":"2024-10-04T17:07:07.591863292+05:00","level":"ERROR","msg":"failed to most popular user","error":"sql: no rows in result set"}
+{"time":"2024-10-04T17:08:23.403673561+05:00","level":"ERROR","msg":"failed to update user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_country_fkey\""}
+{"time":"2024-10-04T17:09:19.369595888+05:00","level":"ERROR","msg":"failed to update user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_country_fkey\""}
+{"time":"2024-10-04T17:13:52.306843836+05:00","level":"ERROR","msg":"failed to update user","error":"pq: could not determine data type of parameter $1"}

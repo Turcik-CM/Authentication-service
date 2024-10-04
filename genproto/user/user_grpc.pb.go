@@ -40,7 +40,7 @@ type UserServiceClient interface {
 	MostPopularUser(ctx context.Context, in *Void, opts ...grpc.CallOption) (*UserResponse, error)
 	// auth
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
-	LoginEmail(ctx context.Context, in *LoginEmailRequest, opts ...grpc.CallOption) (*LoginResponse1, error)
+	LoginEmail(ctx context.Context, in *LoginEmailRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	LoginUsername(ctx context.Context, in *LoginUsernameRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	AcceptCodeToRegister(ctx context.Context, in *AcceptCode, opts ...grpc.CallOption) (*RegisterResponse, error)
 	ForgotPassword(ctx context.Context, in *ForgotPasswordRequest, opts ...grpc.CallOption) (*Message, error)
@@ -49,7 +49,7 @@ type UserServiceClient interface {
 	GetUserByEmail(ctx context.Context, in *Email, opts ...grpc.CallOption) (*GetProfileResponse, error)
 	UpdatePassword(ctx context.Context, in *UpdatePasswordReq, opts ...grpc.CallOption) (*Message, error)
 	// nationality
-	AddNationality(ctx context.Context, in *Nationality, opts ...grpc.CallOption) (*Void, error)
+	AddNationality(ctx context.Context, in *Nat, opts ...grpc.CallOption) (*Nationality, error)
 	GetNationalityById(ctx context.Context, in *NId, opts ...grpc.CallOption) (*Nationality, error)
 	ListNationalities(ctx context.Context, in *Pagination, opts ...grpc.CallOption) (*Nationalities, error)
 	UpdateNationality(ctx context.Context, in *Nationality, opts ...grpc.CallOption) (*Void, error)
@@ -199,8 +199,8 @@ func (c *userServiceClient) Register(ctx context.Context, in *RegisterRequest, o
 	return out, nil
 }
 
-func (c *userServiceClient) LoginEmail(ctx context.Context, in *LoginEmailRequest, opts ...grpc.CallOption) (*LoginResponse1, error) {
-	out := new(LoginResponse1)
+func (c *userServiceClient) LoginEmail(ctx context.Context, in *LoginEmailRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+	out := new(LoginResponse)
 	err := c.cc.Invoke(ctx, "/user.UserService/LoginEmail", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -271,8 +271,8 @@ func (c *userServiceClient) UpdatePassword(ctx context.Context, in *UpdatePasswo
 	return out, nil
 }
 
-func (c *userServiceClient) AddNationality(ctx context.Context, in *Nationality, opts ...grpc.CallOption) (*Void, error) {
-	out := new(Void)
+func (c *userServiceClient) AddNationality(ctx context.Context, in *Nat, opts ...grpc.CallOption) (*Nationality, error) {
+	out := new(Nationality)
 	err := c.cc.Invoke(ctx, "/user.UserService/AddNationality", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -338,7 +338,7 @@ type UserServiceServer interface {
 	MostPopularUser(context.Context, *Void) (*UserResponse, error)
 	// auth
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
-	LoginEmail(context.Context, *LoginEmailRequest) (*LoginResponse1, error)
+	LoginEmail(context.Context, *LoginEmailRequest) (*LoginResponse, error)
 	LoginUsername(context.Context, *LoginUsernameRequest) (*LoginResponse, error)
 	AcceptCodeToRegister(context.Context, *AcceptCode) (*RegisterResponse, error)
 	ForgotPassword(context.Context, *ForgotPasswordRequest) (*Message, error)
@@ -347,7 +347,7 @@ type UserServiceServer interface {
 	GetUserByEmail(context.Context, *Email) (*GetProfileResponse, error)
 	UpdatePassword(context.Context, *UpdatePasswordReq) (*Message, error)
 	// nationality
-	AddNationality(context.Context, *Nationality) (*Void, error)
+	AddNationality(context.Context, *Nat) (*Nationality, error)
 	GetNationalityById(context.Context, *NId) (*Nationality, error)
 	ListNationalities(context.Context, *Pagination) (*Nationalities, error)
 	UpdateNationality(context.Context, *Nationality) (*Void, error)
@@ -404,7 +404,7 @@ func (UnimplementedUserServiceServer) MostPopularUser(context.Context, *Void) (*
 func (UnimplementedUserServiceServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
-func (UnimplementedUserServiceServer) LoginEmail(context.Context, *LoginEmailRequest) (*LoginResponse1, error) {
+func (UnimplementedUserServiceServer) LoginEmail(context.Context, *LoginEmailRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginEmail not implemented")
 }
 func (UnimplementedUserServiceServer) LoginUsername(context.Context, *LoginUsernameRequest) (*LoginResponse, error) {
@@ -428,7 +428,7 @@ func (UnimplementedUserServiceServer) GetUserByEmail(context.Context, *Email) (*
 func (UnimplementedUserServiceServer) UpdatePassword(context.Context, *UpdatePasswordReq) (*Message, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
 }
-func (UnimplementedUserServiceServer) AddNationality(context.Context, *Nationality) (*Void, error) {
+func (UnimplementedUserServiceServer) AddNationality(context.Context, *Nat) (*Nationality, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddNationality not implemented")
 }
 func (UnimplementedUserServiceServer) GetNationalityById(context.Context, *NId) (*Nationality, error) {
@@ -871,7 +871,7 @@ func _UserService_UpdatePassword_Handler(srv interface{}, ctx context.Context, d
 }
 
 func _UserService_AddNationality_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Nationality)
+	in := new(Nat)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -883,7 +883,7 @@ func _UserService_AddNationality_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/user.UserService/AddNationality",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).AddNationality(ctx, req.(*Nationality))
+		return srv.(UserServiceServer).AddNationality(ctx, req.(*Nat))
 	}
 	return interceptor(ctx, in, info, handler)
 }

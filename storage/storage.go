@@ -30,7 +30,7 @@ type UserStorage interface {
 	GetUserFollows(in *pb.Id) (*pb.Count, error)
 	MostPopularUser(in *pb.Void) (*pb.UserResponse, error)
 
-	AddNationality(in *pb.Nationality) (*pb.Void, error)
+	AddNationality(in *pb.Nat) (*pb.Nationality, error)
 	GetNationalityById(in *pb.NId) (*pb.Nationality, error)
 	ListNationalities(in *pb.Pagination) (*pb.Nationalities, error)
 	UpdateNationality(in *pb.Nationality) (*pb.Void, error)

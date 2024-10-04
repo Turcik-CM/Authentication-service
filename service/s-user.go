@@ -149,7 +149,7 @@ func (us *AuthService) MostPopularUser(ctx context.Context, in *pb.Void) (*pb.Us
 	}
 	return res, nil
 }
-func (us *AuthService) AddNationality(ctx context.Context, in *pb.Nationality) (*pb.Void, error) {
+func (us *AuthService) AddNationality(ctx context.Context, in *pb.Nat) (*pb.Nationality, error) {
 	res, err := us.user.AddNationality(in)
 	if err != nil {
 		us.log.Error("failed to add nationality", "error", err)

@@ -308,15 +308,20 @@ func (p *UserRepo) MostPopularUser(in *pb.Void) (*pb.UserResponse, error) {
 }
 
 // AddNationality adds a new nationality to the database
-func (p *UserRepo) AddNationality(req *pb.Nationality) (*pb.Void, error) {
+func (p *UserRepo) AddNationality(req *pb.Nat) (*pb.Nationality, error) {
 
-	query := `INSERT INTO nationality (description, name) VALUES ($1, $2)`
-	_, err := p.db.Exec(query, req.Description, req.Name)
+	query := `INSERT INTO nationality (description, name) VALUES ($1, $2) RETURNING id`
+	var id string
+	err := p.db.QueryRow(query, req.Description, req.Name).Scan(&id)
 	if err != nil {
 		return nil, err
 	}
 
-	return &pb.Void{}, nil
+	return &pb.Nationality{
+		Id:          id,
+		Description: req.Description,
+		Name:        req.Name,
+	}, nil
 }
 
 // GetNationalityById retrieves a nationality by its ID

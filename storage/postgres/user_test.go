@@ -285,7 +285,7 @@ func TestAddNationality(t *testing.T) {
 	}
 	user := NewUserRepo(db)
 
-	rst := pb.Nationality{
+	rst := pb.Nat{
 		Name:        "Canadian",
 		Description: "Nationality of Canada",
 	}

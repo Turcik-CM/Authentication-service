@@ -1,5 +1,12 @@
 CREATE TYPE role AS ENUM ('admin', 'user', 'c-admin');
 
+CREATE TABLE IF NOT EXISTS nationality
+(
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR UNIQUE,
+    description VARCHAR
+);
+
 CREATE TABLE IF NOT EXISTS users
 (
     id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -13,6 +20,7 @@ CREATE TABLE IF NOT EXISTS users
     bio           VARCHAR,
     role          role             DEFAULT 'user',
     profile_image VARCHAR          DEFAULT 'no image',
+    nationality   varchar REFERENCES nationality (name),
     created_at    TIMESTAMP        DEFAULT now(),
     updated_at    TIMESTAMP        DEFAULT now(),
     deleted_at    BIGINT           DEFAULT 0,

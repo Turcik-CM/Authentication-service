@@ -306,3 +306,104 @@ func (p *UserRepo) MostPopularUser(in *pb.Void) (*pb.UserResponse, error) {
 
 	return &user, nil
 }
+
+// AddNationality adds a new nationality to the database
+func (p *UserRepo) AddNationality(req *pb.Nationality) (*pb.Void, error) {
+
+	query := `INSERT INTO nationality (description, name) VALUES ($1, $2)`
+	_, err := p.db.Exec(query, req.Description, req.Name)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.Void{}, nil
+}
+
+// GetNationalityById retrieves a nationality by its ID
+func (p *UserRepo) GetNationalityById(req *pb.NId) (*pb.Nationality, error) {
+	query := `SELECT id,description, name FROM nationality WHERE id = $1`
+
+	var nationality pb.Nationality
+	err := p.db.QueryRow(query, req.Id).Scan(&nationality.Id, &nationality.Description, &nationality.Name)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, errors.New("nationality not found")
+		}
+		return nil, err
+	}
+
+	return &nationality, nil
+}
+
+// ListNationalities retrieves a list of nationality with pagination and filter
+func (p *UserRepo) ListNationalities(req *pb.Pagination) (*pb.Nationalities, error) {
+	where := "WHERE TRUE"
+	if req.Name != "" {
+		where += fmt.Sprintf(" AND LOWER(name) LIKE '%%%s%%'", strings.ToLower(req.Name))
+	}
+
+	if req.Description != "" {
+		where += fmt.Sprintf(" AND LOWER(description) LIKE '%%%s%%'", strings.ToLower(req.Description))
+	}
+
+	query := fmt.Sprintf(`SELECT id, name, description FROM nationality %s LIMIT $1 OFFSET $2`, where)
+	rows, err := p.db.Query(query, req.Limit, (req.Page-1)*req.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var nationalities []*pb.Nationality
+	for rows.Next() {
+		var nationality pb.Nationality
+		if err := rows.Scan(&nationality.Id, &nationality.Name, &nationality.Description); err != nil {
+			return nil, err
+		}
+		nationalities = append(nationalities, &nationality)
+	}
+
+	return &pb.Nationalities{Nationalities: nationalities}, nil
+}
+
+// UpdateNationality updates the name of an existing nationality
+func (p *UserRepo) UpdateNationality(req *pb.Nationality) (*pb.Void, error) {
+	setValues := make([]string, 0, 2)
+	args := make([]interface{}, 0, 3)
+	count := 1
+	if req.Name != "" {
+		setValues = append(setValues, "name = $"+strconv.Itoa(count))
+		args = append(args, req.Name)
+		count++
+	}
+	if req.Description != "" {
+		setValues = append(setValues, "description = $"+strconv.Itoa(count))
+		args = append(args, req.Description)
+		count++
+	}
+
+	setValuesStr := strings.Join(setValues, ", ")
+
+	query := fmt.Sprintf(`UPDATE nationality
+	                       SET %s
+	                       WHERE id = $%d`, setValuesStr, count)
+
+	args = append(args, req.Id)
+
+	_, err := p.db.Exec(query, args...)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.Void{}, nil
+}
+
+// DeleteNationality deletes a nationality from the database
+func (p *UserRepo) DeleteNationality(req *pb.NId) (*pb.Void, error) {
+	query := `DELETE FROM nationality WHERE id = $1`
+	_, err := p.db.Exec(query, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.Void{}, nil
+}

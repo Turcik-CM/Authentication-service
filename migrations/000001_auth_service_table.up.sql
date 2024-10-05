@@ -24,5 +24,5 @@ CREATE TABLE IF NOT EXISTS follows
     follower_id  UUID REFERENCES users (id) ON DELETE CASCADE,
     following_id UUID REFERENCES users (id) ON DELETE CASCADE,
     followed_at  TIMESTAMP DEFAULT now(),
-    PRIMARY KEY (follower_id, following_id)
+    UNIQUE (follower_id, following_id)
 );

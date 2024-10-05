@@ -149,3 +149,47 @@ func (us *AuthService) MostPopularUser(ctx context.Context, in *pb.Void) (*pb.Us
 	}
 	return res, nil
 }
+func (us *AuthService) AddNationality(ctx context.Context, in *pb.Nat) (*pb.Nationality, error) {
+	res, err := us.user.AddNationality(in)
+	if err != nil {
+		us.log.Error("failed to add nationality", "error", err)
+		return nil, err
+	}
+	return res, nil
+}
+
+func (us *AuthService) GetNationalityById(ctx context.Context, in *pb.NId) (*pb.Nationality, error) {
+	res, err := us.user.GetNationalityById(in)
+	if err != nil {
+		us.log.Error("failed to get nationality by id", "error", err)
+		return nil, err
+	}
+	return res, nil
+}
+
+func (us *AuthService) ListNationalities(ctx context.Context, in *pb.Pagination) (*pb.Nationalities, error) {
+	res, err := us.user.ListNationalities(in)
+	if err != nil {
+		us.log.Error("failed to list nationalities", "error", err)
+		return nil, err
+	}
+	return res, nil
+}
+
+func (us *AuthService) UpdateNationality(ctx context.Context, in *pb.Nationality) (*pb.Void, error) {
+	res, err := us.user.UpdateNationality(in)
+	if err != nil {
+		us.log.Error("failed to update nationality", "error", err)
+		return nil, err
+	}
+	return res, nil
+}
+
+func (us *AuthService) DeleteNationality(ctx context.Context, in *pb.NId) (*pb.Void, error) {
+	res, err := us.user.DeleteNationality(in)
+	if err != nil {
+		us.log.Error("failed to delete nationality", "error", err)
+		return nil, err
+	}
+	return res, nil
+}

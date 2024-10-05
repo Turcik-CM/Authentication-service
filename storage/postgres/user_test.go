@@ -277,3 +277,101 @@ func TestMostPopularUser(t *testing.T) {
 	}
 	fmt.Println(req)
 }
+
+func TestAddNationality(t *testing.T) {
+	db, err := ConnectUser()
+	if err != nil {
+		t.Errorf("Failed to connect to database: %v", err)
+	}
+	user := NewUserRepo(db)
+
+	rst := pb.Nat{
+		Name:        "Canadian",
+		Description: "Nationality of Canada",
+	}
+
+	_, err = user.AddNationality(&rst)
+	if err != nil {
+		t.Errorf("Failed to add nationality: %v", err)
+	}
+	fmt.Println("Added nationality:", rst.Name)
+}
+
+func TestGetNationalityById(t *testing.T) {
+	db, err := ConnectUser()
+	if err != nil {
+		t.Errorf("Failed to connect to database: %v", err)
+	}
+	user := NewUserRepo(db)
+
+	rst := pb.NId{
+		Id: "5d57f237-bd1d-4282-8810-1887c464f7b1", // Assuming there is a nationality with ID 1
+	}
+
+	req, err := user.GetNationalityById(&rst)
+	if err != nil {
+		t.Errorf("Failed to get nationality: %v", err)
+	}
+	fmt.Println("Nationality fetched:", req)
+}
+
+func TestListNationalities(t *testing.T) {
+	db, err := ConnectUser()
+	if err != nil {
+		t.Errorf("Failed to connect to database: %v", err)
+	}
+	user := NewUserRepo(db)
+
+	req := pb.Pagination{
+		Limit: 10,
+		Page:  1,
+		Name:  "canadian", // Optional filter
+	}
+
+	res, err := user.ListNationalities(&req)
+	if err != nil {
+		t.Errorf("Failed to list nationalities: %v", err)
+	}
+
+	for _, nationality := range res.Nationalities {
+		fmt.Println("Nationality:", nationality.Name, nationality.Description)
+	}
+}
+
+func TestUpdateNationality(t *testing.T) {
+	db, err := ConnectUser()
+	if err != nil {
+		t.Errorf("Failed to connect to database: %v", err)
+	}
+	user := NewUserRepo(db)
+
+	req := pb.Nationality{
+		Id:          "5d57f237-bd1d-4282-8810-1887c464f7b1", // Assuming a valid ID
+		Name:        "Updated Nationality Name",
+		Description: "Updated Description",
+	}
+
+	_, err = user.UpdateNationality(&req)
+	if err != nil {
+		t.Errorf("Failed to update nationality: %v", err)
+	}
+	fmt.Println("Updated nationality with ID:", req.Id)
+}
+
+func TestDeleteNationality(t *testing.T) {
+	db, err := ConnectUser()
+	if err != nil {
+		t.Errorf("Failed to connect to database: %v", err)
+	}
+	user := NewUserRepo(db)
+
+	rst := pb.NId{
+		Id: "5d57f237-bd1d-4282-8810-1887c464f7b1", // Assuming there is a nationality with ID 1
+	}
+
+	_, err = user.DeleteNationality(&rst)
+	if err != nil {
+		t.Errorf("Failed to delete nationality: %v", err)
+	}
+	fmt.Println("Deleted nationality with ID:", rst.Id)
+}

@@ -10,6 +10,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v4"
 	"github.com/jmoiron/sqlx"
+	"strconv"
+	"strings"
 
 	pb "auth-service/genproto/user"
 )
@@ -58,11 +60,44 @@ func (p *UserRepo) GetProfile(req *pb.Id) (*pb.GetProfileResponse, error) {
 }
 
 func (p *UserRepo) UpdateProfile(req *pb.UpdateProfileRequest) (*pb.UserResponse, error) {
-	query := `UPDATE users 
-	          SET first_name = $1, last_name = $2, username = $3, country = $4, bio = $5, profile_image = $6, updated_at = now()
-	          WHERE id = $7 RETURNING id`
+	setValues := make([]string, 0, 6)
+	args := make([]interface{}, 0, 7)
+	count := 1
+	if req.FirstName != "" {
+		setValues = append(setValues, "first_name = $"+strconv.Itoa(count))
+		count++
+		args = append(args, req.FirstName)
+	}
+	if req.LastName != "" {
+		setValues = append(setValues, "last_name = $"+strconv.Itoa(count))
+		count++
+		args = append(args, req.LastName)
+	}
+	if req.Username != "" {
+		setValues = append(setValues, "username = $"+strconv.Itoa(count))
+		count++
+		args = append(args, req.Username)
+	}
+	if req.Nationality != "" {
+		setValues = append(setValues, "country = $"+strconv.Itoa(count))
+		count++
+		args = append(args, req.Nationality)
+	}
+	if req.Bio != "" {
+		setValues = append(setValues, "bio = $"+strconv.Itoa(count))
+		count++
+		args = append(args, req.Bio)
+	}
 
-	_, err := p.db.Exec(query, req.FirstName, req.LastName, req.Username, req.Nationality, req.Bio, req.ProfileImage, req.UserId)
+	setValuesStr := strings.Join(setValues, ", ")
+
+	query := fmt.Sprintf(`UPDATE users 
+	                       SET %s, updated_at = now()
+	                       WHERE id = $%d RETURNING id`, setValuesStr, len(args)+1)
+
+	args = append(args, req.UserId)
+
+	_, err := p.db.Exec(query, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -96,7 +131,7 @@ func (p *UserRepo) ChangePassword(req *pb.ChangePasswordRequest) (*pb.ChangePass
 }
 
 func (p *UserRepo) ChangeProfileImage(req *pb.URL) (*pb.Void, error) {
-	query := `UPDATE users SET profile_image = $1, updated_at = now() WHERE id = $2`
+	query := `UPDATE users SET profile_image = $1, updated_at = now() WHERE id = $2 and deleted_at = 0`
 	_, err := p.db.Exec(query, req.Url, req.UserId)
 	if err != nil {
 		return nil, err
@@ -106,12 +141,17 @@ func (p *UserRepo) ChangeProfileImage(req *pb.URL) (*pb.Void, error) {
 }
 
 func (p *UserRepo) FetchUsers(req *pb.Filter) (*pb.UserResponses, error) {
-	query := `SELECT id, email, first_name, last_name, username, created_at
-	          FROM users
-	          WHERE username ILIKE $1 AND role = 'user'
-	          LIMIT $2 OFFSET $3`
+	where := "WHERE role = 'user'"
+	if req.FirstName != "" {
+		where += fmt.Sprintf(" AND username ILIKE '%s%%'", req.FirstName)
+	}
 
-	rows, err := p.db.Query(query, req.FirstName, req.Limit, (req.Page-1)*req.Limit)
+	query := fmt.Sprintf(`SELECT id, email, first_name, last_name, username, created_at
+	          FROM users
+	          %s
+	          LIMIT $1 OFFSET $2`, where)
+
+	rows, err := p.db.Query(query, req.Limit, (req.Page-1)*req.Limit)
 	if err != nil {
 		return nil, err
 	}
@@ -139,7 +179,7 @@ func (p *UserRepo) ListOfFollowing(req *pb.Id) (*pb.Follows, error) {
 		WHERE f.follower_id = $1;
     `
 
-	err := p.db.Select(&followings, query, req.UserId)
+	err := p.db.Select(&followings.Following, query, req.UserId)
 	if err != nil {
 		return nil, err
 	}
@@ -156,7 +196,7 @@ func (p *UserRepo) ListOfFollowers(req *pb.Id) (*pb.Follows, error) {
 		WHERE f.following_id = $1;
     `
 
-	err := p.db.Select(&followers, query, req.UserId)
+	err := p.db.Select(&followers.Following, query, req.UserId)
 	if err != nil {
 		return nil, err
 	}
@@ -265,4 +305,110 @@ func (p *UserRepo) MostPopularUser(in *pb.Void) (*pb.UserResponse, error) {
 	}
 
 	return &user, nil
+}
+
+// AddNationality adds a new nationality to the database
+func (p *UserRepo) AddNationality(req *pb.Nat) (*pb.Nationality, error) {
+
+	query := `INSERT INTO nationality (description, name) VALUES ($1, $2) RETURNING id`
+	var id string
+	err := p.db.QueryRow(query, req.Description, req.Name).Scan(&id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.Nationality{
+		Id:          id,
+		Description: req.Description,
+		Name:        req.Name,
+	}, nil
+}
+
+// GetNationalityById retrieves a nationality by its ID
+func (p *UserRepo) GetNationalityById(req *pb.NId) (*pb.Nationality, error) {
+	query := `SELECT id,description, name FROM nationality WHERE id = $1`
+
+	var nationality pb.Nationality
+	err := p.db.QueryRow(query, req.Id).Scan(&nationality.Id, &nationality.Description, &nationality.Name)
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			return nil, errors.New("nationality not found")
+		}
+		return nil, err
+	}
+
+	return &nationality, nil
+}
+
+// ListNationalities retrieves a list of nationality with pagination and filter
+func (p *UserRepo) ListNationalities(req *pb.Pagination) (*pb.Nationalities, error) {
+	where := "WHERE TRUE"
+	if req.Name != "" {
+		where += fmt.Sprintf(" AND LOWER(name) LIKE '%%%s%%'", strings.ToLower(req.Name))
+	}
+
+	if req.Description != "" {
+		where += fmt.Sprintf(" AND LOWER(description) LIKE '%%%s%%'", strings.ToLower(req.Description))
+	}
+
+	query := fmt.Sprintf(`SELECT id, name, description FROM nationality %s LIMIT $1 OFFSET $2`, where)
+	rows, err := p.db.Query(query, req.Limit, (req.Page-1)*req.Limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var nationalities []*pb.Nationality
+	for rows.Next() {
+		var nationality pb.Nationality
+		if err := rows.Scan(&nationality.Id, &nationality.Name, &nationality.Description); err != nil {
+			return nil, err
+		}
+		nationalities = append(nationalities, &nationality)
+	}
+
+	return &pb.Nationalities{Nationalities: nationalities}, nil
+}
+
+// UpdateNationality updates the name of an existing nationality
+func (p *UserRepo) UpdateNationality(req *pb.Nationality) (*pb.Void, error) {
+	setValues := make([]string, 0, 2)
+	args := make([]interface{}, 0, 3)
+	count := 1
+	if req.Name != "" {
+		setValues = append(setValues, "name = $"+strconv.Itoa(count))
+		args = append(args, req.Name)
+		count++
+	}
+	if req.Description != "" {
+		setValues = append(setValues, "description = $"+strconv.Itoa(count))
+		args = append(args, req.Description)
+		count++
+	}
+
+	setValuesStr := strings.Join(setValues, ", ")
+
+	query := fmt.Sprintf(`UPDATE nationality
+	                       SET %s
+	                       WHERE id = $%d`, setValuesStr, count)
+
+	args = append(args, req.Id)
+
+	_, err := p.db.Exec(query, args...)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.Void{}, nil
+}
+
+// DeleteNationality deletes a nationality from the database
+func (p *UserRepo) DeleteNationality(req *pb.NId) (*pb.Void, error) {
+	query := `DELETE FROM nationality WHERE id = $1`
+	_, err := p.db.Exec(query, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.Void{}, nil
 }

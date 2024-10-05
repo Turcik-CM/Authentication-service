@@ -282,3 +282,4 @@
 {"time":"2024-10-04T17:08:23.403673561+05:00","level":"ERROR","msg":"failed to update user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_country_fkey\""}
 {"time":"2024-10-04T17:09:19.369595888+05:00","level":"ERROR","msg":"failed to update user","error":"pq: insert or update on table \"users\" violates foreign key constraint \"users_country_fkey\""}
 {"time":"2024-10-04T17:13:52.306843836+05:00","level":"ERROR","msg":"failed to update user","error":"pq: could not determine data type of parameter $1"}
+{"time":"2024-10-05T16:44:19.28903263+05:00","level":"ERROR","msg":"Error connecting to database"}

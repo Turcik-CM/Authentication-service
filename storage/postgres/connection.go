@@ -16,5 +16,11 @@ func ConnectPostgres(config config.Config) (*sqlx.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	err = db.Ping()
+	if err != nil {
+		return nil, err
+	}
+
 	return db, nil
 }

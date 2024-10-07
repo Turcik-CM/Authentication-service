@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS users
     first_name    VARCHAR NOT NULL,
     last_name     VARCHAR NOT NULL,
     username      VARCHAR,
-    country       VARCHAR,
     password      VARCHAR NOT NULL,
     bio           VARCHAR,
     role          role             DEFAULT 'user',

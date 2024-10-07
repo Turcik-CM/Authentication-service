@@ -25,15 +25,10 @@ func NewAuthRepo(db *sqlx.DB) storage.AuthStorage {
 func (a *AuthRepo) Register(in *pb.RegisterRequest) (*pb.RegisterResponse, error) {
 	var id string
 	var flag string
-	query := `INSERT INTO users (phone, email, password, first_name, last_name, username, country, bio) 
+	query := `INSERT INTO users (phone, email, password, first_name, nationality, last_name, username, bio) 
 			  VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
 			  RETURNING id`
-	err := a.db.QueryRow(query, in.Phone, in.Email, in.Password, in.FirstName, in.LastName, in.Username, in.Country, in.Bio).Scan(&id)
-	if err != nil {
-		return &pb.RegisterResponse{}, err
-	}
-
-	err = a.db.Get(&flag, "SELECT flag FROM countries WHERE country = $1", in.Country)
+	err := a.db.QueryRow(query, in.Phone, in.Email, in.Password, in.FirstName, in.Nationality, in.LastName, in.Username, in.Bio).Scan(&id)
 	if err != nil {
 		return &pb.RegisterResponse{}, err
 	}
@@ -142,9 +137,9 @@ func (a *AuthRepo) LoginUsername(in *pb.LoginUsernameRequest) (*pb.LoginResponse
 }
 
 func (a *AuthRepo) RegisterAdmin(in *pb.Message) (*pb.Message, error) {
-	query := `INSERT INTO users (email, password, role,first_name,last_name,username) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`
+	query := `INSERT INTO users (email, password, role, nationality,first_name,last_name,username) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`
 	var id string
-	err := a.db.QueryRow(query, "admiN", in.Message, "c-admin", "adminchikov", "admin", "admin").Scan(&id)
+	err := a.db.QueryRow(query, "admiN", in.Message, "c-admin", "Uzbek", "adminchikov", "admin", "admin").Scan(&id)
 	if err != nil {
 		return nil, err
 	}

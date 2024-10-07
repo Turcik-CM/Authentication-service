@@ -27,7 +27,7 @@ func NewUserRepo(db *sqlx.DB) storage.UserStorage {
 func (p *UserRepo) Create(req *pb.CreateRequest) (*pb.UserResponse, error) {
 	userID := uuid.New().String()
 
-	query := `INSERT INTO users (id, phone, email, password, first_name, last_name, username, country, bio, role) 
+	query := `INSERT INTO users (id, phone, email, password, first_name, last_name, nationality, username, bio, role) 
 	          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`
 	_, err := p.db.Exec(query, userID, req.Phone, req.Email, req.Password,
 		req.FirstName, req.LastName, req.Username, req.Nationality, req.Bio, req.Role)
@@ -39,7 +39,7 @@ func (p *UserRepo) Create(req *pb.CreateRequest) (*pb.UserResponse, error) {
 }
 
 func (p *UserRepo) GetProfile(req *pb.Id) (*pb.GetProfileResponse, error) {
-	query := `SELECT id, email, phone, first_name, last_name, username, country, bio, 
+	query := `SELECT id, email, phone, first_name, last_name, username, nationality, bio, 
 	                 (SELECT COUNT(*) FROM follows WHERE following_id = users.id) AS follower_count, 
 	                 (SELECT COUNT(*) FROM follows WHERE follower_id = users.id) AS following_count
 	          FROM users
@@ -79,7 +79,7 @@ func (p *UserRepo) UpdateProfile(req *pb.UpdateProfileRequest) (*pb.UserResponse
 		args = append(args, req.Username)
 	}
 	if req.Nationality != "" {
-		setValues = append(setValues, "country = $"+strconv.Itoa(count))
+		setValues = append(setValues, "nationality = $"+strconv.Itoa(count))
 		count++
 		args = append(args, req.Nationality)
 	}
@@ -290,7 +290,7 @@ func (p *UserRepo) MostPopularUser(in *pb.Void) (*pb.UserResponse, error) {
 		return nil, fmt.Errorf("failed to get most popular user: %w", err)
 	}
 
-	query1 := `SELECT id, email, phone, first_name, last_name, username, country, bio, created_at
+	query1 := `SELECT id, email, phone, first_name, last_name, username, nationality, bio, created_at
 	          FROM users
 	          WHERE id = $1 AND role != 'c-admin' AND deleted_at = 0`
 

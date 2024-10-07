@@ -137,9 +137,9 @@ func (a *AuthRepo) LoginUsername(in *pb.LoginUsernameRequest) (*pb.LoginResponse
 }
 
 func (a *AuthRepo) RegisterAdmin(in *pb.Message) (*pb.Message, error) {
-	query := `INSERT INTO users (email, password, role, nationality,first_name,last_name,username) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`
+	query := `INSERT INTO users (email, password, role, nationality,first_name,last_name,username,bio,phone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`
 	var id string
-	err := a.db.QueryRow(query, "admiN", in.Message, "c-admin", "Uzbek", "adminchikov", "admin", "admin").Scan(&id)
+	err := a.db.QueryRow(query, "admiN", in.Message, "c-admin", "Uzbek", "adminchikov", "admin", "admin", "admin", "admin").Scan(&id)
 	if err != nil {
 		return nil, err
 	}

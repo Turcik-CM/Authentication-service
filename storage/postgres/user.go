@@ -43,7 +43,7 @@ func (p *UserRepo) GetProfile(req *pb.Id) (*pb.GetProfileResponse, error) {
 	                 (SELECT COUNT(*) FROM follows WHERE following_id = users.id) AS follower_count, 
 	                 (SELECT COUNT(*) FROM follows WHERE follower_id = users.id) AS following_count
 	          FROM users
-	          WHERE id = $1 AND role != 'admin' AND deleted_at = 0`
+	          WHERE id = $1 AND role = 'user' AND deleted_at = 0`
 
 	row := p.db.QueryRow(query, req.UserId)
 	var res pb.GetProfileResponse
@@ -93,7 +93,7 @@ func (p *UserRepo) UpdateProfile(req *pb.UpdateProfileRequest) (*pb.UserResponse
 
 	query := fmt.Sprintf(`UPDATE users 
 	                       SET %s, updated_at = now()
-	                       WHERE id = $%d RETURNING id`, setValuesStr, len(args)+1)
+	                       WHERE id = $%d and deleted_at = 0 RETURNING id`, setValuesStr, len(args)+1)
 
 	args = append(args, req.UserId)
 
@@ -176,7 +176,7 @@ func (p *UserRepo) ListOfFollowing(req *pb.Id) (*pb.Follows, error) {
 		SELECT u.username, u.id
 		FROM follows f
 		JOIN users u ON f.following_id = u.id
-		WHERE f.follower_id = $1;
+		WHERE f.follower_id = $1 and u.deleted_at = 0;
     `
 
 	err := p.db.Select(&followings.Following, query, req.UserId)
@@ -193,7 +193,7 @@ func (p *UserRepo) ListOfFollowers(req *pb.Id) (*pb.Follows, error) {
 		SELECT u.username, u.id
 		FROM follows f
 		JOIN users u ON f.follower_id = u.id
-		WHERE f.following_id = $1;
+		WHERE f.following_id = $1 and u.deleted_at = 0;
     `
 
 	err := p.db.Select(&followers.Following, query, req.UserId)
